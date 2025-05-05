@@ -45,7 +45,7 @@ Com o crescimento do uso do Pix no Brasil, também aumentaram os golpes e fraude
 
 ## 🚀 Tecnologias Utilizadas
 
-- **Java 17** + Spring Boot 3 (REST API, banco, DICT)
+- **Java 21** + Spring Boot 3 (REST API, banco, DICT)
 - **Python 3.11** + FastAPI (serviço de IA)
 - **PostgreSQL** (armazenamento)
 - **Docker** + Docker Compose (orquestração)
