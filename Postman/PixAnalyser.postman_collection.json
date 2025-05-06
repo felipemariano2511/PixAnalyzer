@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "0f10c552-3473-4063-8b94-0de68bd4c4bc",
+		"name": "PixAnalyser",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43766876",
+		"_collection_link": "https://felipemariano-5136873.postman.co/workspace/Felipe-Mariano's-Workspace~533e7d92-5dbf-45de-8402-37704dd7e01a/collection/43766876-0f10c552-3473-4063-8b94-0de68bd4c4bc?action=share&source=collection_link&creator=43766876"
+	},
+	"item": [
+		{
+			"name": "DICT_API",
+			"item": [
+				{
+					"name": "BuscarDadosDaChavePix",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key\" : \"+5572861890493\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/dict/keys",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"dict",
+								"keys"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DadosGov_API",
+			"item": [
+				{
+					"name": "BuscarDadosDoCPF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/cpf/86427930150",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cpf",
+								"86427930150"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
