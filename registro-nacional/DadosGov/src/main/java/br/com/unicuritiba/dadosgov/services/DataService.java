@@ -20,7 +20,7 @@ public class DataService {
     public ResponseEntity<DataDTO> getByCpf(String cpf) {
         var cpfData = repository.findByCpf(cpf)
                 .orElseThrow(() -> new NotFoundException(
-                        String.format("o CPF %s não foi encontrado em nossa base de dados.", cpf)
+                        String.format("O CPF %s não foi encontrado em nossa base de dados.", cpf)
                 ));
 
         return ResponseEntity.ok(DataMapper.toDTO(cpfData));
