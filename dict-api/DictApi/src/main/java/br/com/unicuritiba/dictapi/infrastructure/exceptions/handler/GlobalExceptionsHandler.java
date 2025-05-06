@@ -1,6 +1,6 @@
 package br.com.unicuritiba.dictapi.infrastructure.exceptions.handler;
 
-import br.com.unicuritiba.projetoathus.infrastructure.exceptions.*;
+import br.com.unicuritiba.dictapi.infrastructure.exceptions.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
