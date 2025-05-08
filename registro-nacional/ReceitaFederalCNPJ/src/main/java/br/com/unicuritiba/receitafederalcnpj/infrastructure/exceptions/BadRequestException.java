@@ -1,4 +1,4 @@
-package br.com.unicuritiba.dadosgov.infrastructure.exceptions;
+package br.com.unicuritiba.receitafederalcnpj.infrastructure.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
