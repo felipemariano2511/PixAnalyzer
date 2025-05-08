@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "data")
+@Table(name = "data_cpf")
 @Getter
 @Setter
 public class Data {
