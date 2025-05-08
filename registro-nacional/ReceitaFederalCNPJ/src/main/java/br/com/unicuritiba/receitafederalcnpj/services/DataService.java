@@ -1,6 +1,6 @@
 package br.com.unicuritiba.receitafederalcnpj.services;
 
-import br.com.unicuritiba.dadosgov.infrastructure.exceptions.NotFoundException;
+import br.com.unicuritiba.receitafederalcnpj.infrastructure.exceptions.NotFoundException;
 import br.com.unicuritiba.receitafederalcnpj.domain.models.Data;
 import br.com.unicuritiba.receitafederalcnpj.domain.repositories.DataRepository;
 import br.com.unicuritiba.receitafederalcnpj.dto.DataResponseDTO;
