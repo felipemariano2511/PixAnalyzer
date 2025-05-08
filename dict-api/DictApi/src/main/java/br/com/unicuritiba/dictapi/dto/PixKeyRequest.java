@@ -1,7 +1,10 @@
 package br.com.unicuritiba.dictapi.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class PixKeyRequest {
     private String key;
-    public String getKey() { return key; }
-    public void setKey(String key) { this.key = key; }
 }
