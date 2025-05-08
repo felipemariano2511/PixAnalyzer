@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "0f10c552-3473-4063-8b94-0de68bd4c4bc",
+		"_postman_id": "56e975a8-680f-4fbe-95ee-40a28d15c317",
 		"name": "PixAnalyser",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "43766876",
-		"_collection_link": "https://felipemariano-5136873.postman.co/workspace/Felipe-Mariano's-Workspace~533e7d92-5dbf-45de-8402-37704dd7e01a/collection/43766876-0f10c552-3473-4063-8b94-0de68bd4c4bc?action=share&source=collection_link&creator=43766876"
+		"_collection_link": "https://felipemariano-5136873.postman.co/workspace/Felipe-Mariano's-Workspace~533e7d92-5dbf-45de-8402-37704dd7e01a/collection/43766876-56e975a8-680f-4fbe-95ee-40a28d15c317?action=share&source=collection_link&creator=43766876"
 	},
 	"item": [
 		{
@@ -25,11 +25,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/dict/keys",
+							"raw": "localhost:8081/api/dict/keys",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"api",
 								"dict",
@@ -45,7 +45,7 @@
 			"name": "DadosGov_API",
 			"item": [
 				{
-					"name": "BuscarDadosDoCPF",
+					"name": "BuscarInfoCPF",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -59,6 +59,64 @@
 								"api",
 								"cpf",
 								"86427930150"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ReceitaFederalCNPJ_API",
+			"item": [
+				{
+					"name": "BuscarInfoCNPJ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8083/api/cnpj/0384612500012",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"cnpj",
+								"0384612500012"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PixAnalyser_API",
+			"item": [
+				{
+					"name": "RealizarTransferênciaPix",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"destinationKeyValue\" : \"40ea9f26-90a9-47c7-82d4-9b00060ec6c3\",\r\n    \"idClient\" : 1,\r\n    \"amount\" : 35000.00,\r\n    \"description\" : \"Primeira transferência de teste.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/trasferencia/pix",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trasferencia",
+								"pix"
 							]
 						}
 					},
