@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
 
   dict-api:
@@ -10,9 +8,9 @@ services:
       - pix-network
 
   pix-analyser:
-    build: ./java-service/PixAnalyser
+    build: ./java-service/PixKeyAnalyser
     ports:
-      - "8080:8080"
+      - "8084:8084"
     depends_on:
       - dict-api
     networks:
@@ -29,13 +27,6 @@ services:
     build: ./registro-nacional/ReceitaFederalCNPJ
     ports:
       - "8083:8083"
-    networks:
-      - pix-network
-
-  python-ia:
-    build: ./python-ia
-    ports:
-      - "5000:5000"
     networks:
       - pix-network
 
