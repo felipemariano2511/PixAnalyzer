@@ -42,7 +42,7 @@ public class PixTransactionService {
             HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
 
             ResponseEntity<PixKeyResponseWrapper> response = restTemplate.exchange(
-                    "http://dict-api-container:8081/api/dict/keys",
+                    "http://dict-api:8081/api/dict/keys",
                     HttpMethod.POST,
                     requestEntity,
                     new ParameterizedTypeReference<PixKeyResponseWrapper>() {}
