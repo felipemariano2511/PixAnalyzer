@@ -1,5 +1,7 @@
 package br.com.unicuritiba.dadosgov.infrastructure.configs;
 
+import br.com.unicuritiba.dadosgov.domain.repositories.DataRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
@@ -10,6 +12,9 @@ import java.sql.Connection;
 @Component
 public class DadosGovDataInitializer implements CommandLineRunner {
 
+    @Autowired
+    private DataRepository repository;
+
     private final DataSource dataSource;
 
     public DadosGovDataInitializer(DataSource dataSource) {
@@ -19,8 +24,12 @@ public class DadosGovDataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try (Connection connection = dataSource.getConnection()) {
-            ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/data.sql"));
-            System.out.println("Arquivo data.sql executado com sucesso.");
+            var keyOptional = repository.findByCpf("51839604700");
+
+            if(keyOptional.isEmpty()){
+                ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/data.sql"));
+                System.out.println("Arquivo data.sql executado com sucesso. Os dados foram inseridos no banco de dados.");
+            }
         }
     }
 }
