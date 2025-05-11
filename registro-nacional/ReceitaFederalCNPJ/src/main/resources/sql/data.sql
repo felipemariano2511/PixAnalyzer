@@ -1304,9 +1304,9 @@ INSERT INTO data_cnpj (
     secondary_description, street, number, complement, district, city, state,
     postal_code, email, phone, share_capital, branch_type
 ) VALUES (
-             'cc318d51-5cc4-1459-b7d5-0a0c766a709d', '47863592000139', 'Costa', 'Modi', '2006-01-20',
-             '215-1 - Sociedade Simples', 'INATIVA', '2024-06-15', 'Encerrada voluntariamente',
-             '6203-1/00', 'Reprehenderit error iure enim quia error maxime accusamus.', '8599-6/99', 'Minus ut culpa quo impedit.',
-             'Vila de Aragão', 8883, 'Sala 885', 'Ápia', 'Castro de Barros', 'PR', '61731275',
-             'heitor72@costela.net', '+55 71 9369 9837', 481605, 'MATRIZ'
-         );
+            'cc318d51-5cc4-1459-b7d5-0a0c766a709d', '47863592000139', 'Costa', 'Modi', '2006-01-20',
+            '215-1 - Sociedade Simples', 'INATIVA', '2024-06-15', 'Encerrada voluntariamente',
+            '6203-1/00', 'Reprehenderit error iure enim quia error maxime accusamus.', '8599-6/99', 'Minus ut culpa quo impedit.',
+            'Vila de Aragão', 8883, 'Sala 885', 'Ápia', 'Castro de Barros', 'PR', '61731275',
+            'heitor72@costela.net', '+55 71 9369 9837', 481605, 'MATRIZ'
+        );
