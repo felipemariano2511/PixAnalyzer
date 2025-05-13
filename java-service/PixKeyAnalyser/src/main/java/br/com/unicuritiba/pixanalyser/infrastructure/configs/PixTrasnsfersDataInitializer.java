@@ -28,8 +28,8 @@ public class PixTrasnsfersDataInitializer implements CommandLineRunner {
             var keyOptional = repository.findById(UUID.fromString("cc34f1e4-4c45-4fea-b91f-6ca2b26ee9f6"));
 
             if(keyOptional.isEmpty()){
-                ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/data-bk.sql"));
-                System.out.println("Arquivo data-bk.sql executado com sucesso. Os dados foram inseridos no banco de dados.");
+                ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/data.sql"));
+                System.out.println("Arquivo data.sql executado com sucesso. Os dados foram inseridos no banco de dados.");
             }
         }
     }
