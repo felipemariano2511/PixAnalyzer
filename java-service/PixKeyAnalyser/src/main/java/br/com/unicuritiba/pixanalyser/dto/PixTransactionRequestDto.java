@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @AllArgsConstructor
-public class PixTransactionRequest {
+public class PixTransactionRequestDto {
 
     private String destinationKeyValue;
     private Long idClient;
