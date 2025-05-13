@@ -25,7 +25,7 @@ public class DictApiDataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try (Connection connection = dataSource.getConnection()) {
-            var keyOptional = repository.findByKey("46bfe0e6-4d82-43a0-9292-1039de1ad12c");
+            var keyOptional = repository.findByKey("02119883030");
 
             if(keyOptional.isEmpty()){
                 ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/data.sql"));

@@ -24,7 +24,7 @@ public class ReceitaFederalCnpjDataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try (Connection connection = dataSource.getConnection()) {
-            var keyOptional = repository.findByCnpj("65137294000143");
+            var keyOptional = repository.findByCnpj("43606098932405");
 
             if(keyOptional.isEmpty()){
                 ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/data.sql"));

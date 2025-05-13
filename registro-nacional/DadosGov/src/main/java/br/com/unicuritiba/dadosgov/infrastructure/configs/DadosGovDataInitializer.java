@@ -24,7 +24,7 @@ public class DadosGovDataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try (Connection connection = dataSource.getConnection()) {
-            var keyOptional = repository.findByCpf("51839604700");
+            var keyOptional = repository.findByCpf("99992368632");
 
             if(keyOptional.isEmpty()){
                 ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/data.sql"));
