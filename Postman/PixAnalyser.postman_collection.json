@@ -8,119 +8,296 @@
 	},
 	"item": [
 		{
-			"name": "DICT_API",
+			"name": "Localhost",
 			"item": [
 				{
-					"name": "BuscarDadosDaChavePix",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"key\" : \"+5572861890493\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "PixAnalyser_API",
+					"item": [
+						{
+							"name": "RealizarTransferênciaPix",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"destinationKeyValue\" : \"7cc8f27e-f4e9-4a8a-ad48-0989eb84eef1\",\r\n    \"idClient\" : 1,\r\n    \"amount\" : 35000.00,\r\n    \"description\" : \"Primeira transferência de teste.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8084/transferencia/pix",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"transferencia",
+										"pix"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8081/api/dict/keys",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"dict",
-								"keys"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "DadosGov_API",
-			"item": [
+					]
+				},
 				{
-					"name": "BuscarInfoCPF",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/api/cpf/86427930150",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"cpf",
-								"86427930150"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "ReceitaFederalCNPJ_API",
-			"item": [
-				{
-					"name": "BuscarInfoCNPJ",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8083/api/cnpj/0384612500012",
-							"host": [
-								"localhost"
-							],
-							"port": "8083",
-							"path": [
-								"api",
-								"cnpj",
-								"0384612500012"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "PixAnalyser_API",
-			"item": [
-				{
-					"name": "RealizarTransferênciaPix",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"destinationKeyValue\" : \"40ea9f26-90a9-47c7-82d4-9b00060ec6c3\",\r\n    \"idClient\" : 1,\r\n    \"amount\" : 35000.00,\r\n    \"description\" : \"Primeira transferência de teste.\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "ReceitaFederalCNPJ_API",
+					"item": [
+						{
+							"name": "BuscarInfoCNPJ",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost/api/receita-federal/cnpj/83470529000104",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"receita-federal",
+										"cnpj",
+										"83470529000104"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/trasferencia/pix",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"trasferencia",
-								"pix"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "DICT_API",
+					"item": [
+						{
+							"name": "BuscarDadosDaChavePix",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\" : \"+5572861890493\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost/api/dict-api/keys",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"dict-api",
+										"keys"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DadosGov_API",
+					"item": [
+						{
+							"name": "BuscarInfoCPF",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost/api/dados-gov/cpf/86427930150",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"dados-gov",
+										"cpf",
+										"86427930150"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PixAnalyser_Docker",
+					"item": [
+						{
+							"name": "RealizarTransferênciaPix",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"destinationKeyValue\" : \"+5572861890493\",\r\n    \"idClient\" : 1,\r\n    \"amount\" : 35000.00,\r\n    \"description\" : \"Primeira transferência de teste.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost/api/pix-analyser/transferencia/pix",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"pix-analyser",
+										"transferencia",
+										"pix"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CloudVPS",
+			"item": [
+				{
+					"name": "PixAnalyser_API",
+					"item": [
+						{
+							"name": "RealizarTransferênciaPix",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"destinationKeyValue\" : \"43606098932405\",\r\n    \"idClient\" : 1,\r\n    \"amount\" : 70000.00,\r\n    \"description\" : \"Transferência de teste.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://felipemariano.com.br/api/pix-analyser/transferencia/pix",
+									"protocol": "https",
+									"host": [
+										"felipemariano",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"pix-analyser",
+										"transferencia",
+										"pix"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ReceitaFederalCNPJ_API",
+					"item": [
+						{
+							"name": "BuscarInfoCNPJ",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://felipemariano.com.br/api/receita-federal/cnpj/43606098932405",
+									"protocol": "https",
+									"host": [
+										"felipemariano",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"receita-federal",
+										"cnpj",
+										"43606098932405"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DICT_API",
+					"item": [
+						{
+							"name": "BuscarDadosDaChavePix",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\" : \"7cc8f27e-f4e9-4a8a-ad48-0989eb84eef1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://felipemariano.com.br/api/dict-api/keys",
+									"protocol": "https",
+									"host": [
+										"felipemariano",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"dict-api",
+										"keys"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DadosGov_API",
+					"item": [
+						{
+							"name": "BuscarInfoCPF",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://felipemariano.com.br/api/dados-gov/cpf/09136072907",
+									"protocol": "https",
+									"host": [
+										"felipemariano",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"dados-gov",
+										"cpf",
+										"09136072907"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}

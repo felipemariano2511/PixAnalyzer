@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.unicuritiba</groupId>
 	<artifactId>DadosGov</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>DadosGov</name>
 	<description>Plataforma de simulação da API DICT do Banco Central com análise inteligente de chaves Pix via IA. Detecte fraudes, valide identidade e proteja seu sistema financeiro em tempo real.</description>
 	<url/>
@@ -65,6 +65,7 @@
 
 	<build>
 		<plugins>
+			<!-- Plugin do compilador Java -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -80,6 +81,20 @@
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
+			</plugin>
+
+			<!-- Plugin do Spring Boot para gerar um jar executável -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.2.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,4 +1,4 @@
-package br.com.unicuritiba.dadosgov.infrastructure.exceptions.handler;
+package br.com.unicuritiba.receitafederalcnpj.infrastructure.exceptions.handler;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
