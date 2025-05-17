@@ -1,6 +1,6 @@
-package br.com.unicuritiba.dadosgov.infrastructure.exceptions.handler;
+package br.com.unicuritiba.receitafederalcnpj.infrastructure.exceptions.handler;
 
-import br.com.unicuritiba.dadosgov.infrastructure.exceptions.*;
+import br.com.unicuritiba.receitafederalcnpj.infrastructure.exceptions.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
