@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package pixanalyser;
+
+option java_multiple_files = true;
+option java_package = "br.com.unicuritiba.pixanalyser";
+option java_outer_classname = "AiAnalyzeProto";
+
+message AiAnalyzeRequest {
+  string id = 1;
+  string endToEndId = 2;
+  string originClientId = 3;
+  string destinationKeyValue = 4;
+  double amount = 5;
+  string timestamp = 6;
+  string key = 7;
+  string key_type = 8;
+  string institution = 9;
+  string branch = 10;
+  string account_number = 11;
+  string account_type = 12;
+  string owner_type = 13;
+  string owner_name = 14;
+  string cnpj = 15;
+  string company_name = 16;
+  string registration_date = 17;
+  string status = 18;
+  string status_date = 19;
+  double share_capital = 20;
+  string branch_type = 21;
+  int32 common_transfers_client = 22;
+  int32 all_transfers = 23;
+}
+
+message AiAnalyzeResponse {
+  double confidence_score = 1;
+  repeated string fraud_reasons = 2;
+}
+
+service AiAnalyzeService {
+  rpc AiAnalyze (AiAnalyzeRequest) returns (AiAnalyzeResponse);
+}
