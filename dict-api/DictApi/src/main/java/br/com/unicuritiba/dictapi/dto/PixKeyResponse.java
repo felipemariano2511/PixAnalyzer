@@ -1,9 +1,9 @@
 package br.com.unicuritiba.dictapi.dto;
 
 public record PixKeyResponse(
-        String key_type,
-        String key_value,
+        String keyType,
+        String keyValue,
         AccountResponse account,
         OwnerResponse owner,
-        String created_at
+        String createdAt
 ) {}

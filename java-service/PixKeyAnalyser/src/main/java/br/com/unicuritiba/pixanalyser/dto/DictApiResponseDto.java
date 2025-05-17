@@ -14,6 +14,7 @@ public class DictApiResponseDto {
     private String keyValue;
 
     private Account account;
+
     private Owner owner;
 
     @JsonProperty("created_at")
