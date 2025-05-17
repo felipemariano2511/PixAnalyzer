@@ -1,14 +1,13 @@
-package br.com.unicuritiba.receitafederalcnpj.dto;
+package br.com.unicuritiba.pixanalyser.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.List;
 
 @Getter
 @Setter
-public class DataResponseDTO {
+public class ReceitaFederalCnpjResponseDto {
 
     private String cnpj;
     private String companyName;
@@ -18,9 +17,9 @@ public class DataResponseDTO {
     private String status;
     private String statusDate;
     private String statusReason;
-    private ActivityDTO mainActivity;
-    private List<ActivityDTO> secondaryActivities;
-    private AddressDTO address;
+    private Activities mainActivity;
+    private List<Activities> secondaryActivities;
+    private Address address;
     private String email;
     private String phone;
     private String shareCapital;
@@ -28,20 +27,22 @@ public class DataResponseDTO {
 
     @Getter
     @Setter
-    public static class ActivityDTO {
+    public static class Activities {
         private String code;
         private String description;
     }
 
     @Getter
     @Setter
-    public static class AddressDTO {
+    public static class Address {
         private String street;
         private String number;
         private String complement;
         private String district;
         private String city;
         private String state;
+
+        @JsonProperty("postal_code")
         private String postalCode;
     }
 }

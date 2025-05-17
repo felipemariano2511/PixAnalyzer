@@ -4,7 +4,7 @@ services:
     container_name: nginx_proxy
     depends_on:
       - dict-api
-      - pix-analyser
+      - pix-analyzer
       - dados-gov
       - receita-federal
     volumes:
@@ -53,11 +53,12 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
-  pix-analyser:
+  pix-analyzer:
     build: ./java-service/PixKeyAnalyser
     container_name: pix_analyser
     depends_on:
       - wait-for-db
+      - ai-server
     environment:
       DB_HOST: db-postgres
       DB_USER: postgres
@@ -100,6 +101,21 @@ services:
       - public_network
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+  ai-server:
+      build:
+        context: ./python-ia/ai_analyze
+        dockerfile: Dockerfile
+      container_name: ai_server
+      depends_on:
+        - wait-for-db
+      networks:
+        - private_network
+        - public_network
+      volumes:
+        - ./python-ia:/app
+      working_dir: /app/ai_analyze
+      command: ["python", "grpc_interface/server.py"]
 
 networks:
   private_network:
