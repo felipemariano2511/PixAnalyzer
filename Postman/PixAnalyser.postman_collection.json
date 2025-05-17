@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "56e975a8-680f-4fbe-95ee-40a28d15c317",
+		"_postman_id": "7db40f60-ff55-44e0-871a-14fb698dfdd1",
 		"name": "PixAnalyser",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "43766876",
-		"_collection_link": "https://felipemariano-5136873.postman.co/workspace/Felipe-Mariano's-Workspace~533e7d92-5dbf-45de-8402-37704dd7e01a/collection/43766876-56e975a8-680f-4fbe-95ee-40a28d15c317?action=share&source=collection_link&creator=43766876"
+		"_collection_link": "https://felipemariano-5136873.postman.co/workspace/Felipe-Mariano's-Workspace~533e7d92-5dbf-45de-8402-37704dd7e01a/collection/43766876-7db40f60-ff55-44e0-871a-14fb698dfdd1?action=share&source=collection_link&creator=43766876"
 	},
 	"item": [
 		{
@@ -53,7 +53,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost/api/receita-federal/cnpj/83470529000104",
+									"raw": "https://localhost/api/receita-federal/cnpj/43606098932405",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -62,7 +62,7 @@
 										"api",
 										"receita-federal",
 										"cnpj",
-										"83470529000104"
+										"43606098932405"
 									]
 								}
 							},
@@ -140,7 +140,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"destinationKeyValue\" : \"+5572861890493\",\r\n    \"idClient\" : 1,\r\n    \"amount\" : 35000.00,\r\n    \"description\" : \"Primeira transferência de teste.\"\r\n}",
+									"raw": "{\r\n    \"destinationKeyValue\" : \"43606098932405\",\r\n    \"idClient\" : 1,\r\n    \"amount\" : 35000.00,\r\n    \"description\" : \"Primeira transferência de teste.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -148,14 +148,14 @@
 									}
 								},
 								"url": {
-									"raw": "https://localhost/api/pix-analyser/transferencia/pix",
+									"raw": "https://localhost/api/pix-analyzer/transferencia/pix",
 									"protocol": "https",
 									"host": [
 										"localhost"
 									],
 									"path": [
 										"api",
-										"pix-analyser",
+										"pix-analyzer",
 										"transferencia",
 										"pix"
 									]
