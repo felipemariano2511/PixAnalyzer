@@ -111,7 +111,6 @@ services:
         - wait-for-db
       networks:
         - private_network
-        - public_network
       volumes:
         - ./python-ia:/app
       working_dir: /app/ai_analyze
