@@ -8,28 +8,27 @@ option java_outer_classname = "AiAnalyzeCnpjProto";
 
 message AiAnalyzeCnpjRequest {
   string id = 1;
-  string end_to_end_id = 2;
-  string origin_client_id = 3;
-  string destination_key_value = 4;
-  double amount = 5;
-  string timestamp = 6;
-  string key = 7;
-  string key_type = 8;
-  string institution = 9;
-  string branch = 10;
-  string account_number = 11;
-  string account_type = 12;
-  string owner_type = 13;
-  string owner_name = 14;
-  string cnpj = 15;
-  string company_name = 16;
-  string registration_date = 17;
-  string status = 18;
-  string status_date = 19;
-  double share_capital = 20;
-  string branch_type = 21;
-  int32 common_transfers_client = 22;
-  int32 all_transfers = 23;
+  int32 origin_client_id = 2;
+  string destination_key_value = 3;
+  double amount = 4;
+  string timestamp = 5;
+  string key = 6;
+  string key_type = 7;
+  string institution = 8;
+  string branch = 9;
+  string account_number = 10;
+  string account_type = 11;
+  string owner_type = 12;
+  string owner_name = 13;
+  string cnpj = 14;
+  string company_name = 15;
+  string registration_date = 16;
+  string status = 17;
+  string status_date = 18;
+  double share_capital = 19;
+  string branch_type = 20;
+  int32 common_transfers_client = 21;
+  int32 all_transfers = 22;
 }
 
 message AiAnalyzeCnpjResponse {
