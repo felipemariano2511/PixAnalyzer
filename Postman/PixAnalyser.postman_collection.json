@@ -20,7 +20,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"destinationKeyValue\" : \"7cc8f27e-f4e9-4a8a-ad48-0989eb84eef1\",\r\n    \"idClient\" : 1,\r\n    \"amount\" : 35000.00,\r\n    \"description\" : \"Primeira transferência de teste.\"\r\n}",
+									"raw": "{\r\n    \"destinationKeyValue\" : \"65881064089\",\r\n    \"idClient\" : 1,\r\n    \"amount\" : 35000.00,\r\n    \"description\" : \"Primeira transferência de teste.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -245,7 +245,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"key\" : \"7cc8f27e-f4e9-4a8a-ad48-0989eb84eef1\"\r\n}",
+									"raw": "{\r\n    \"key\" : \"65881064089\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -280,7 +280,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://felipemariano.com.br/api/dados-gov/cpf/09136072907",
+									"raw": "https://felipemariano.com.br/api/dados-gov/cpf/65881064089",
 									"protocol": "https",
 									"host": [
 										"felipemariano",
@@ -291,7 +291,7 @@
 										"api",
 										"dados-gov",
 										"cpf",
-										"09136072907"
+										"65881064089"
 									]
 								}
 							},
