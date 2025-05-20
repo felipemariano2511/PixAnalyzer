@@ -2,11 +2,15 @@ syntax = "proto3";
 
 package pixanalyser;
 
-message AiAnalyzeRequest {
+option java_multiple_files = true;
+option java_package = "br.com.unicuritiba.pixanalyser";
+option java_outer_classname = "AiAnalyzeCnpjProto";
+
+message AiAnalyzeCnpjRequest {
   string id = 1;
-  string endToEndId = 2;
-  string originClientId = 3;
-  string destinationKeyValue = 4;
+  string end_to_end_id = 2;
+  string origin_client_id = 3;
+  string destination_key_value = 4;
   double amount = 5;
   string timestamp = 6;
   string key = 7;
@@ -28,11 +32,11 @@ message AiAnalyzeRequest {
   int32 all_transfers = 23;
 }
 
-message AiAnalyzeResponse {
+message AiAnalyzeCnpjResponse {
   double confidence_score = 1;
   repeated string fraud_reasons = 2;
 }
 
-service AiAnalyzeService {
-  rpc AiAnalyze (AiAnalyzeRequest) returns (AiAnalyzeResponse);
+service AiAnalyzeCnpjService {
+  rpc AiAnalyzeCnpj (AiAnalyzeCnpjRequest) returns (AiAnalyzeCnpjResponse);
 }

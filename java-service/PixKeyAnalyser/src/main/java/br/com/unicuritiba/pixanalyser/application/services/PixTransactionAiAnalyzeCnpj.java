@@ -1,29 +1,36 @@
 package br.com.unicuritiba.pixanalyser.application.services;
 
-import br.com.unicuritiba.pixanalyser.AiAnalyzeRequest;
-import br.com.unicuritiba.pixanalyser.AiAnalyzeResponse;
+import br.com.unicuritiba.pixanalyser.AiAnalyzeCnpjRequest;
+import br.com.unicuritiba.pixanalyser.AiAnalyzeCnpjResponse;
 import br.com.unicuritiba.pixanalyser.domain.models.PixTransaction;
 import br.com.unicuritiba.pixanalyser.dto.DictApiResponseDto;
 import br.com.unicuritiba.pixanalyser.dto.ReceitaFederalCnpjResponseDto;
-import br.com.unicuritiba.pixanalyser.integrations.ai.AiAnalyzerGrpcClient;
+import br.com.unicuritiba.pixanalyser.integrations.ai.AiAnalyzeCnpjGrpcClient;
 import org.springframework.stereotype.Service;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Service
-public class PixTransactionAiAnalyzer {
+public class PixTransactionAiAnalyzeCnpj {
 
-    private final AiAnalyzerGrpcClient grpcClient;
+    private final AiAnalyzeCnpjGrpcClient grpcClient;
 
-    public PixTransactionAiAnalyzer(AiAnalyzerGrpcClient grpcClient) {
+    public PixTransactionAiAnalyzeCnpj(AiAnalyzeCnpjGrpcClient grpcClient) {
         this.grpcClient = grpcClient;
     }
 
-    public AiAnalyzeResponse analyzeCnpj(DictApiResponseDto dictData,
+    public AiAnalyzeCnpjResponse analyzeCnpj(DictApiResponseDto dictData,
                                          ReceitaFederalCnpjResponseDto receitaData,
                                          PixTransaction transaction) {
 
-        AiAnalyzeRequest request = AiAnalyzeRequest.newBuilder()
+        System.out.println("⚙️ Chamando método analyzeCnpj");
+
+        System.out.println("🔍 receitaData.getShareCapital() = " + receitaData.getShareCapital());
+        System.out.println("🔍 dictData.getAccount() = " + dictData.getAccount());
+        System.out.println("🔍 dictData.getOwner() = " + dictData.getOwner());
+        System.out.println("endToendId " + transaction.getEndToEndId());
+
+        AiAnalyzeCnpjRequest request = AiAnalyzeCnpjRequest.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setEndToEndId(transaction.getEndToEndId())
                 .setOriginClientId(String.valueOf(transaction.getOriginClientId()))
@@ -40,13 +47,24 @@ public class PixTransactionAiAnalyzer {
                 .setOwnerName(dictData.getOwner().getName())
                 .setCnpj(receitaData.getCnpj())
                 .setCompanyName(receitaData.getCompanyName())
+                .setRegistrationDate(receitaData.getRegistrationDate())
                 .setStatus(receitaData.getStatus())
+                .setStatusDate(receitaData.getStatusDate())
                 .setShareCapital(Double.parseDouble(receitaData.getShareCapital()))
                 .setBranchType(receitaData.getBranchType())
-                .setCommonTransfersClient(0)
-                .setAllTransfers(1576)
+                .setCommonTransfersClient(5)
+                .setAllTransfers(50337)
                 .build();
 
-        return grpcClient.analyze(request);
+
+
+
+        try {
+            return grpcClient.analyze(request);
+        } catch (Exception e) {
+            System.err.println("❌ Erro ao chamar IA via gRPC: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao chamar serviço de IA", e);
+        }
     }
 }

@@ -12,4 +12,4 @@ COPY . .
 
 ENV PYTHONPATH=/app/ai_analyze
 
-CMD ["python3", "grpc_interface/server.py"]
+CMD ["python3", "-u", "grpc_interface/server.py"]
