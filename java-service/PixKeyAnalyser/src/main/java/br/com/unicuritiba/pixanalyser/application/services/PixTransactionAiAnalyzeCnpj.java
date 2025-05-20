@@ -28,12 +28,10 @@ public class PixTransactionAiAnalyzeCnpj {
         System.out.println("🔍 receitaData.getShareCapital() = " + receitaData.getShareCapital());
         System.out.println("🔍 dictData.getAccount() = " + dictData.getAccount());
         System.out.println("🔍 dictData.getOwner() = " + dictData.getOwner());
-        System.out.println("endToendId " + transaction.getEndToEndId());
 
         AiAnalyzeCnpjRequest request = AiAnalyzeCnpjRequest.newBuilder()
                 .setId(UUID.randomUUID().toString())
-                .setEndToEndId(transaction.getEndToEndId())
-                .setOriginClientId(String.valueOf(transaction.getOriginClientId()))
+                .setOriginClientId(Math.toIntExact(transaction.getOriginClientId()))
                 .setDestinationKeyValue(transaction.getDestinationKeyValue())
                 .setAmount(transaction.getAmount().doubleValue())
                 .setTimestamp(transaction.getTimestamp().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
@@ -55,9 +53,6 @@ public class PixTransactionAiAnalyzeCnpj {
                 .setCommonTransfersClient(5)
                 .setAllTransfers(50337)
                 .build();
-
-
-
 
         try {
             return grpcClient.analyze(request);
