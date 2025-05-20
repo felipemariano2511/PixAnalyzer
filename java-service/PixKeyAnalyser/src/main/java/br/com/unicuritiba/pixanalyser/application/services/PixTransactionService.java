@@ -1,6 +1,7 @@
 package br.com.unicuritiba.pixanalyser.application.services;
 
 import br.com.unicuritiba.pixanalyser.AiAnalyzeCnpjResponse;
+import br.com.unicuritiba.pixanalyser.AiAnalyzeCpfResponse;
 import br.com.unicuritiba.pixanalyser.application.utils.PixUtils;
 import br.com.unicuritiba.pixanalyser.domain.models.PixTransaction;
 import br.com.unicuritiba.pixanalyser.domain.repositories.PixTransactionRepository;
@@ -41,11 +42,18 @@ public class PixTransactionService {
     @Autowired
     private PixTransactionAiAnalyzeCnpj pixTransactionAiAnalyzeCnpj;
 
+    @Autowired
+    private PixTransactionAiAnalyzeCpf pixTransactionAiAnalyzeCpf;
+
     public ResponseEntity<PixKeyResponseDto> createTransaction(String destinationKeyValue,
                                                                Long originClientId,
                                                                BigDecimal amount,
                                                                String description) {
         AiAnalyzeCnpjResponse aiAnalyzeCnpjResponse = null;
+        AiAnalyzeCpfResponse aiAnalyzeCpfResponse = null;
+        double confidence = 0;
+        List<String> reasons;
+
 
         DictApiResponseDto dataDictApi = apiRestClient.fetchKeyInformation(destinationKeyValue);
 
@@ -64,14 +72,20 @@ public class PixTransactionService {
         PixTransaction saved = transactionRepository.save(transaction);
 
         System.out.println("Tipo da chave pix: " + dataDictApi.getKeyType());
+        System.out.println("Tipo da chave pix: " + dataDictApi.getOwner().getTaxIdNumber());
 
         if (!dataDictApi.getKeyType().equals("CNPJ")) {
             DadosGovResponseDto dataDadosGovApi = pixKeyDadosGovRestClient.fetchCpfInformation(
                     dataDictApi.getOwner().getTaxIdNumber());
 
+            System.out.println("teste de dados Gov = " + dataDadosGovApi.getCpf());
+
             System.out.println("Entrou cpf");
 
-            // chamar proto para CPF (ainda não implementado)
+            aiAnalyzeCpfResponse = pixTransactionAiAnalyzeCpf.analyzeCpf(dataDictApi, dataDadosGovApi, transaction);
+
+            confidence = aiAnalyzeCpfResponse != null ? aiAnalyzeCpfResponse.getConfidenceScore() : 0.0;
+            reasons = aiAnalyzeCpfResponse != null ? aiAnalyzeCpfResponse.getFraudReasonsList() : List.of();
 
         } else {
             ReceitaFederalCnpjResponseDto dataReceitaFederalCnpjApi = pixKeyReceitaFederalCnpjRestClient.fetchCnpjInformation(
@@ -80,14 +94,16 @@ public class PixTransactionService {
             System.out.println("Entrou cnpj");
 
             aiAnalyzeCnpjResponse = pixTransactionAiAnalyzeCnpj.analyzeCnpj(dataDictApi, dataReceitaFederalCnpjApi, transaction);
+
+           confidence = aiAnalyzeCnpjResponse != null ? aiAnalyzeCnpjResponse.getConfidenceScore() : 0.0;
+           reasons = aiAnalyzeCnpjResponse != null ? aiAnalyzeCnpjResponse.getFraudReasonsList() : List.of();
         }
 
         System.out.println("Entrou no retorno");
 
         String receiverName = dataDictApi.getOwner().getName();
 
-        double confidence = aiAnalyzeCnpjResponse != null ? aiAnalyzeCnpjResponse.getConfidenceScore() : 0.0;
-        List<String> reasons = aiAnalyzeCnpjResponse != null ? aiAnalyzeCnpjResponse.getFraudReasonsList() : List.of();
+
 
         return ResponseEntity.ok(PixKeyResponseMapper.toResponseDto(saved, receiverName, confidence, reasons));
     }
