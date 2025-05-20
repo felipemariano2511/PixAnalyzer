@@ -41,8 +41,6 @@ public class ReceitaFederalCnpjResponseDto {
         private String district;
         private String city;
         private String state;
-
-        @JsonProperty("postal_code")
         private String postalCode;
     }
 }
