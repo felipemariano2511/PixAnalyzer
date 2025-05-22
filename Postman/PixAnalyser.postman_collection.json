@@ -14,13 +14,13 @@
 					"name": "PixAnalyser_API",
 					"item": [
 						{
-							"name": "RealizarTransferênciaPix",
+							"name": "BuscarDadosDaChavePix",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"destinationKeyValue\" : \"65881064089\",\r\n    \"idClient\" : 1,\r\n    \"amount\" : 35000.00,\r\n    \"description\" : \"Primeira transferência de teste.\"\r\n}",
+									"raw": "{\r\n    \"destinationKeyValue\" : \"65881064089\",\r\n    \"originClientId\" : 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -28,7 +28,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8084/transferencia/pix",
+									"raw": "http://localhost:8084/transferencia/pix/info-chave-pix",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -36,7 +36,68 @@
 									"port": "8084",
 									"path": [
 										"transferencia",
-										"pix"
+										"pix",
+										"info-chave-pix"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ConsultarAvaliaçãoIA",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"destinationKeyValue\" : \"65881064089\",\r\n    \"originClientId\" : 1,\r\n    \"amount\" : 35000.00,\r\n    \"description\" : \"Primeira transferência de teste.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8084/transferencia/pix/analisar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"transferencia",
+										"pix",
+										"analisar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "RealizarTransferênciaPix",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"destinationKeyValue\" : \"65881064089\",\r\n    \"originClientId\" : 1,\r\n    \"amount\" : 35000.00,\r\n    \"description\" : \"Primeira transferência de teste.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8084/transferencia/pix/transferir",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"transferencia",
+										"pix",
+										"transferir"
 									]
 								}
 							},
