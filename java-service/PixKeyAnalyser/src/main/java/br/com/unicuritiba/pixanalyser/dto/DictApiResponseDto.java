@@ -1,6 +1,5 @@
 package br.com.unicuritiba.pixanalyser.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +34,6 @@ public class DictApiResponseDto {
     public static class Owner {
         private String type;
         private String name;
-
         private String taxIdNumber;
     }
 }

@@ -14,7 +14,6 @@ import java.util.UUID;
 public class PixTransaction {
 
     @Id
-    @GeneratedValue
     private UUID id;
 
     private String endToEndId;

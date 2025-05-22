@@ -1,9 +1,7 @@
 package br.com.unicuritiba.pixanalyser.dto;
 
-import com.google.type.DateTime;
 import lombok.Getter;
 import lombok.Setter;
-
 
 @Getter
 @Setter
