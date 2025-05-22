@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class PixTransactionRequestDto {
 
     private String destinationKeyValue;
-    private Long idClient;
+    private Long originClientId;
     private BigDecimal amount;
     private String description;
 }
