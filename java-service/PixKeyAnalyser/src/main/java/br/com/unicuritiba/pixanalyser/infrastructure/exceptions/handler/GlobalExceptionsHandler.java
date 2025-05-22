@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 
-
 @RestControllerAdvice
 public class GlobalExceptionsHandler {
 
@@ -52,16 +51,18 @@ public class GlobalExceptionsHandler {
         return buildErrorResponse(ex, HttpStatus.CONFLICT, request.getRequestURI());
     }
 
-    @ExceptionHandler(HttpClientErrorException.NotFound.class)
-    public ResponseEntity<ErrorResponse> handleHttpClientNotFound(HttpClientErrorException.NotFound ex, HttpServletRequest request) {
-        ErrorResponse response = new ErrorResponse(
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
-                "Chave Pix não encontrada na base DICT.",
+    @ExceptionHandler(HttpClientErrorException.class)
+    public ResponseEntity<ErrorResponse> handleHttpClientError(HttpClientErrorException ex, HttpServletRequest request) {
+        HttpStatus status = (HttpStatus) ex.getStatusCode();
+        return new ResponseEntity<>(new ErrorResponse(
+                status.value(),
+                status.getReasonPhrase(),
+                ex.getResponseBodyAsString(),
                 request.getRequestURI()
-        );
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        ), status);
     }
+
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(Exception ex, HttpServletRequest request) {

@@ -1,34 +1,34 @@
 package br.com.unicuritiba.pixanalyser.application.services;
 
-import br.com.unicuritiba.pixanalyser.AiAnalyzeCnpjRequest;
-import br.com.unicuritiba.pixanalyser.AiAnalyzeCnpjResponse;
+import br.com.unicuritiba.pixanalyser.AiAnalyzeCpfRequest;
+import br.com.unicuritiba.pixanalyser.AiAnalyzeCpfResponse;
 import br.com.unicuritiba.pixanalyser.domain.repositories.PixTransactionRepository;
 import br.com.unicuritiba.pixanalyser.dto.AiAnalyzeRequestDto;
+import br.com.unicuritiba.pixanalyser.integrations.ai.AiAnalyzeCpfGrpcClient;
 import br.com.unicuritiba.pixanalyser.dto.DictApiResponseDto;
-import br.com.unicuritiba.pixanalyser.dto.ReceitaFederalCnpjResponseDto;
-import br.com.unicuritiba.pixanalyser.integrations.ai.AiAnalyzeCnpjGrpcClient;
+import br.com.unicuritiba.pixanalyser.dto.DadosGovResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
-public class PixTransactionAiAnalyzeCnpj {
+public class PixTransactionAiAnalyzeCpf {
 
     @Autowired
     private PixTransactionRepository pixTransactionRepository;
 
-    private final AiAnalyzeCnpjGrpcClient grpcClient;
+    private final AiAnalyzeCpfGrpcClient grpcClient;
 
-    public PixTransactionAiAnalyzeCnpj(AiAnalyzeCnpjGrpcClient grpcClient) {
+    public PixTransactionAiAnalyzeCpf(AiAnalyzeCpfGrpcClient grpcClient) {
         this.grpcClient = grpcClient;
     }
 
-    public AiAnalyzeCnpjResponse analyzeCnpj(DictApiResponseDto dictData,
-                                         ReceitaFederalCnpjResponseDto receitaData,
-                                         AiAnalyzeRequestDto aiAnalyzeRequestDto) {
+    public AiAnalyzeCpfResponse analyzeCpf(DictApiResponseDto dictData,
+                                           DadosGovResponseDto dataGov,
+                                           AiAnalyzeRequestDto aiAnalyzeRequestDto) {
         try {
-            AiAnalyzeCnpjRequest request = AiAnalyzeCnpjRequest.newBuilder()
+            AiAnalyzeCpfRequest request = AiAnalyzeCpfRequest.newBuilder()
                     .setId(UUID.randomUUID().toString())
                     .setOriginClientId(Math.toIntExact(aiAnalyzeRequestDto.getOriginClientId()))
                     .setDestinationKeyValue(aiAnalyzeRequestDto.getDestinationKeyValue())
@@ -42,13 +42,11 @@ public class PixTransactionAiAnalyzeCnpj {
                     .setAccountType(dictData.getAccount().getType())
                     .setOwnerType(dictData.getOwner().getType())
                     .setOwnerName(dictData.getOwner().getName())
-                    .setCnpj(receitaData.getCnpj())
-                    .setCompanyName(receitaData.getCompanyName())
-                    .setRegistrationDate(receitaData.getRegistrationDate())
-                    .setStatus(receitaData.getStatus())
-                    .setStatusDate(receitaData.getStatusDate())
-                    .setShareCapital(Double.parseDouble(receitaData.getShareCapital()))
-                    .setBranchType(receitaData.getBranchType())
+                    .setCpf(dataGov.getCpf())
+                    .setFullName(dataGov.getFullName())
+                    .setBirthDate(dataGov.getBirthDate())
+                    .setRegistrationDate(dataGov.getRegistrationDate())
+                    .setStatus(dataGov.getStatus())
                     .setCommonTransfersClient(countCommonTransfers(aiAnalyzeRequestDto.getOriginClientId(), aiAnalyzeRequestDto.getDestinationKeyValue()))
                     .setAllTransfers(countAllTransfers(aiAnalyzeRequestDto.getDestinationKeyValue()))
                     .build();

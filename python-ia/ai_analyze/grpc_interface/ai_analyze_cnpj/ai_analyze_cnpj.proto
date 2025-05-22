@@ -2,10 +2,6 @@ syntax = "proto3";
 
 package pixanalyser;
 
-option java_multiple_files = true;
-option java_package = "br.com.unicuritiba.pixanalyser";
-option java_outer_classname = "AiAnalyzeCnpjProto";
-
 message AiAnalyzeCnpjRequest {
   string id = 1;
   int32 origin_client_id = 2;
