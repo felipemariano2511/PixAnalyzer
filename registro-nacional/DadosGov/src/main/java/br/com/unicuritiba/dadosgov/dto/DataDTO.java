@@ -14,6 +14,8 @@ public class DataDTO {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date registrationDate;
     private String status;
     private String checkDigits;

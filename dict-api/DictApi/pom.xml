@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.unicuritiba</groupId>
 	<artifactId>DictApi</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>DictApi</name>
 	<description>Plataforma de simulação da API DICT do Banco Central com análise inteligente de chaves Pix via IA. Detecte fraudes, valide identidade e proteja seu sistema financeiro em tempo real.</description>
 	<url/>
@@ -65,9 +65,11 @@
 
 	<build>
 		<plugins>
+			<!-- Plugin do compilador Java -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -80,17 +82,19 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
+
+			<!-- Plugin do Spring Boot para gerar um jar executável -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
+				<version>3.2.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

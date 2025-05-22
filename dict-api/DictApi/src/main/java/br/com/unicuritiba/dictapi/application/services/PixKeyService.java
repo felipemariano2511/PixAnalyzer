@@ -18,7 +18,7 @@ public class PixKeyService {
     public ResponseEntity<PixKeyResponse> searchPixKey(String key) {
         var pixKey = repository.findByKey(key)
                 .orElseThrow(() -> new NotFoundException(
-                        String.format("Chave Pix %s não encontrada em nossa base de dados.", key)
+                        String.format("Chave Pix: %s não encontrada em nossa base de dados.", key)
                 ));
 
         return ResponseEntity.ok(PixKeyMapper.toResponse(pixKey));
