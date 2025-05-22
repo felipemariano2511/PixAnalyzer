@@ -361,6 +361,31 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "ReceitaFederalCNPJ_API",
+			"item": [
+				{
+					"name": "BuscarInfoCNPJ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8083/api/cnpj/0384612500012",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"cnpj",
+								"0384612500012"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
