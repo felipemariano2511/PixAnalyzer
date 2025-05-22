@@ -1,23 +1,19 @@
 package br.com.unicuritiba.pixanalyser.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class DictApiResponseDto {
-    @JsonProperty("key_type")
     private String keyType;
 
-    @JsonProperty("key_value")
     private String keyValue;
 
     private Account account;
 
     private Owner owner;
 
-    @JsonProperty("created_at")
     private String createdAt;
 
     public String getInstitution() {
@@ -38,8 +34,6 @@ public class DictApiResponseDto {
     public static class Owner {
         private String type;
         private String name;
-
-        @JsonProperty("tax_id_number")
         private String taxIdNumber;
     }
 }

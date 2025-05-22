@@ -2,33 +2,33 @@ package br.com.unicuritiba.pixanalyser.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
 @Setter
-public class PixKeyResponseDto {
+public class AiAnalyzeResponseDto {
 
-    private List<Transfer> transfers;
-    private AiAnalyse analysis;
+    private TransactionInformation transactionInformation;
+    private AiAnalyze aiAnalyze;
 
     @Getter
     @Setter
-    public static class Transfer {
-        private String endToEndId;
-        private Long originClientId;
+    public static class TransactionInformation {
+        private String originClientName;
         private String originBank;
+        private BigDecimal balance;
         private String destinationKeyValue;
-        private String receiverName;
         private String destinationBank;
-        private String amount;
-        private String description;
-        private String timestamp;
+        private String receiverName;
+        private String taxIdNumber;
     }
 
     @Getter
     @Setter
-    public static class AiAnalyse {
+    public static class AiAnalyze {
         private double confidenceScore;
         private List<String> fraudReasons;
     }
+
 }

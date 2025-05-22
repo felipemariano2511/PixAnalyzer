@@ -6,10 +6,10 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class DadosGovResponseWrapperDto {
+public class DictApiResponseWrapperDto {
 
     private Map<String, String> headers;
-    private DadosGovResponseDto body;
+    private DictApiResponseDto body;
     private int statusCodeValue;
     private String statusCode;
 }

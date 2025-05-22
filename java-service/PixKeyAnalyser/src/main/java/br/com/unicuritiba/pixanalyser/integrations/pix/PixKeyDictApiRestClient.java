@@ -1,7 +1,7 @@
 package br.com.unicuritiba.pixanalyser.integrations.pix;
 
 import br.com.unicuritiba.pixanalyser.dto.DictApiResponseDto;
-import br.com.unicuritiba.pixanalyser.dto.PixKeyResponseWrapperDto;
+import br.com.unicuritiba.pixanalyser.dto.DictApiResponseWrapperDto;
 import br.com.unicuritiba.pixanalyser.infrastructure.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -28,16 +28,16 @@ public class PixKeyDictApiRestClient {
 
             HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
 
-            ResponseEntity<PixKeyResponseWrapperDto> response = restTemplate.exchange(
+            ResponseEntity<DictApiResponseWrapperDto> response = restTemplate.exchange(
                     "https://felipemariano.com.br/api/dict-api/keys",
                     HttpMethod.POST,
                     requestEntity,
-                    new ParameterizedTypeReference<PixKeyResponseWrapperDto>() {}
+                    new ParameterizedTypeReference<DictApiResponseWrapperDto>() {}
             );
 
             return response.getBody().getBody();
 
-        } catch (HttpClientErrorException.NotFound e) {
+        } catch (HttpClientErrorException e) {
             throw new NotFoundException(String.format(
                     "Chave Pix: %s não encontrada na base de dados do DICT.", destinationKey));
         }
