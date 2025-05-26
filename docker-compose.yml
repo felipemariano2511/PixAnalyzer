@@ -55,8 +55,8 @@ services:
       - "host.docker.internal:host-gateway"
 
   pix-analyzer:
-    build: ./java-service/PixKeyAnalyser
-    container_name: pix_analyser
+    build: ./java-service/PixKeyAnalyzer
+    container_name: pix_analyzer
     depends_on:
       - wait-for-db
       - ai-server
@@ -64,7 +64,7 @@ services:
       DB_HOST: db-postgres
       DB_USER: postgres
       DB_PASSWORD: 123456
-      POSTGRES_DB: pix_analyser
+      POSTGRES_DB: pix_analyzer
     networks: 
       - private_network
       - public_network
