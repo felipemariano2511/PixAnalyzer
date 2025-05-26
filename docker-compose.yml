@@ -10,6 +10,7 @@ services:
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/ssl:/etc/nginx/ssl:ro 
+      - webapp-dist:/usr/share/nginx/html/web-app:ro
     ports:
       - '80:80'
       - '443:443'
@@ -54,8 +55,8 @@ services:
       - "host.docker.internal:host-gateway"
 
   pix-analyzer:
-    build: ./java-service/PixKeyAnalyser
-    container_name: pix_analyser
+    build: ./java-service/PixKeyAnalyzer
+    container_name: pix_analyzer
     depends_on:
       - wait-for-db
       - ai-server
@@ -63,7 +64,7 @@ services:
       DB_HOST: db-postgres
       DB_USER: postgres
       DB_PASSWORD: 123456
-      POSTGRES_DB: pix_analyser
+      POSTGRES_DB: pix_analyzer
     networks: 
       - private_network
       - public_network
@@ -116,6 +117,16 @@ services:
       working_dir: /app/ai_analyze
       command: ["python", "grpc_interface/server.py"]
 
+  web-app:
+    build: ./web-app/PixAnalyzer
+    container_name: web_app
+    depends_on:
+      - pix-analyzer
+    volumes:
+    - webapp-dist:/app/dist
+    networks:
+      - public_network
+      
 networks:
   private_network:
     driver: bridge
@@ -124,3 +135,4 @@ networks:
 
 volumes:
   pgdata:
+  webapp-dist:

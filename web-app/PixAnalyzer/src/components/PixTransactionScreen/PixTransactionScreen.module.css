@@ -1,0 +1,391 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+.pixContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: white;
+}
+
+.pixHeader {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #8b008b 0%,
+    #8b008b 45%,
+    #9e006e 52%,
+    #b1123a 60%,
+    #cc092f 70%,
+    #cc092f 100%
+  );
+  overflow: visible;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  z-index: 0;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  margin: 0 auto;
+  max-width: 400px;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 55px;
+  margin-top: -10px;
+}
+
+.backButton {
+  position: absolute;
+  top: -13px;
+  left: 20px;
+  color: white;
+  font-size: 24px;
+  z-index: 3;
+}
+
+.infoBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: white;
+}
+
+.infoIcon {
+  margin-right: 6px;
+}
+
+.infoLink {
+  color: #ffe0ff;
+  text-decoration: underline;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 1;
+  pointer-events: none;
+  transform: translateX(100px);
+  overflow: hidden;
+}
+
+.pixBody {
+  color: #222;
+}
+
+.pixBodyInner {
+  width: 88%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.recipientInfoCard {
+  background-color: #ffffff;
+  padding: 18px 20px;
+  border-radius: 14px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin: -25px auto 0 auto;
+  position: relative;
+  z-index: 5;
+  width: 88%;
+  max-width: 300px;
+}
+
+.iconContainer {
+  background-color: #d8f8e2;
+  color: #00b37e;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.recipientDetails p {
+  margin: 2px 0;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.blurred {
+  color: #999;
+}
+
+.amountSection {
+  margin-top: 6px;
+}
+
+.amountLabel {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.secondaryLabel {
+  font-size: 15px;
+  font-weight: 550;
+  color: #666;
+  margin-top: 4px;
+  margin-bottom: -2px;
+  margin-left: 10px;
+}
+
+.amountInputWrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #000;
+  padding-bottom: 6px;
+  padding-left: 6px;
+
+}
+
+.currencyPrefix {
+  font-size: 18px;
+  color: #000;
+  margin-right: 2px;
+  margin-left: 3px;
+}
+
+.amountInput {
+  flex: 1;
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #000;
+  padding-left: 4px;
+}
+
+.amountInput::placeholder {
+  color: #000;
+}
+
+.amountInput:focus {
+  border: none;
+  outline: none;
+}
+
+.amountInput::-webkit-inner-spin-button,
+.amountInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quickAmountScroll {
+  overflow-x: auto;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.quickAmountButtons {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 0;
+  direction: ltr;
+  scroll-behavior: smooth;
+}
+
+.quickAmountButtons button {
+  direction: ltr;
+  white-space: nowrap;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px 16px;
+  border-radius: 20px;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.quickAmountButtons button:hover {
+  background-color: #e6f0ff;
+}
+
+.balanceSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.balanceLabel {
+  font-weight: bold;
+}
+
+.balanceValue {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.balanceText {
+  background-color: #ccc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.eyeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #007bff;
+  font-size: 18px;
+}
+
+.eyeButton:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.scheduleSection {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.scheduleInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.scheduleLabel {
+  font-weight: 600;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.scheduleDate {
+  font-weight: bold;
+  font-size: 16px;
+  color: #888;
+}
+
+.repeatWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.calendarEmoji {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.repeatButton {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.repeatButton:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.calendarIcon {
+  margin-left: 6px;
+  font-size: 16px;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.continueButton {
+  text-align: center;
+  background-color: #cc092f;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  max-width: 300px;
+  cursor: pointer;
+}
+
+.continueButton:visited,
+.continueButton:hover,
+.continueButton:active {
+  color: white;
+  text-decoration: none;
+}
+
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  background-color: #999 !important;
+  cursor: default;
+}
+
+.cancelButton {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;  /* centraliza horizontalmente */
+  margin-top: 10px;
+}
+
+.hiddenBalance {
+  color: transparent;
+  user-select: none;
+  pointer-events: none;
+  text-shadow: none;
+}
+

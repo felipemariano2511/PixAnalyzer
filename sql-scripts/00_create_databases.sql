@@ -2,8 +2,8 @@ SELECT 'CREATE DATABASE dict_api'
 WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'dict_api')
 \gexec
 
-SELECT 'CREATE DATABASE pix_analyser'
-WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'pix_analyser')
+SELECT 'CREATE DATABASE pix_analyzer'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'pix_analyzer')
 \gexec
 
 SELECT 'CREATE DATABASE receita_federal_cnpj'
