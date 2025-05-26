@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package pixanalyser;
+package pixanalyzer;
 
 message AiAnalyzeCpfRequest {
   string id = 1;
