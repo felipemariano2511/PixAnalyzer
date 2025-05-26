@@ -7,7 +7,7 @@ function App() {
   return (
     <Router basename="/web-app">
       <Routes>
-        <Route path="/" element={<PixInputScreen />} />
+        <Route path="/home" element={<PixInputScreen />} />
         <Route path="/valor" element={<PixTransactionScreen />} />
         <Route path="/conta" element={<PixAccountScreen />} />
       </Routes>
