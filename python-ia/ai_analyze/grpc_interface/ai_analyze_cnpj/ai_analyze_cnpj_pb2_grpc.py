@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from . import ai_analyze_cnpj_pb2 as ai__analyze__cnpj_dot_ai__analyze__cnpj__pb2
+from . import ai_analyze_cnpj_pb2 as ai__analyze__cnpj__pb2
 
 GRPC_GENERATED_VERSION = '1.71.0'
 GRPC_VERSION = grpc.__version__
@@ -18,7 +18,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in ai_analyze_cnpj/ai_analyze_cnpj_pb2_grpc.py depends on'
+        + f' but the generated code in ai_analyze_cnpj_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -35,9 +35,9 @@ class AiAnalyzeCnpjServiceStub(object):
             channel: A grpc.Channel.
         """
         self.AiAnalyzeCnpj = channel.unary_unary(
-                '/pixanalyser.AiAnalyzeCnpjService/AiAnalyzeCnpj',
-                request_serializer=ai__analyze__cnpj_dot_ai__analyze__cnpj__pb2.AiAnalyzeCnpjRequest.SerializeToString,
-                response_deserializer=ai__analyze__cnpj_dot_ai__analyze__cnpj__pb2.AiAnalyzeCnpjResponse.FromString,
+                '/pixanalyzer.AiAnalyzeCnpjService/AiAnalyzeCnpj',
+                request_serializer=ai__analyze__cnpj__pb2.AiAnalyzeCnpjRequest.SerializeToString,
+                response_deserializer=ai__analyze__cnpj__pb2.AiAnalyzeCnpjResponse.FromString,
                 _registered_method=True)
 
 
@@ -55,14 +55,14 @@ def add_AiAnalyzeCnpjServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'AiAnalyzeCnpj': grpc.unary_unary_rpc_method_handler(
                     servicer.AiAnalyzeCnpj,
-                    request_deserializer=ai__analyze__cnpj_dot_ai__analyze__cnpj__pb2.AiAnalyzeCnpjRequest.FromString,
-                    response_serializer=ai__analyze__cnpj_dot_ai__analyze__cnpj__pb2.AiAnalyzeCnpjResponse.SerializeToString,
+                    request_deserializer=ai__analyze__cnpj__pb2.AiAnalyzeCnpjRequest.FromString,
+                    response_serializer=ai__analyze__cnpj__pb2.AiAnalyzeCnpjResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'pixanalyser.AiAnalyzeCnpjService', rpc_method_handlers)
+            'pixanalyzer.AiAnalyzeCnpjService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('pixanalyser.AiAnalyzeCnpjService', rpc_method_handlers)
+    server.add_registered_method_handlers('pixanalyzer.AiAnalyzeCnpjService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -83,9 +83,9 @@ class AiAnalyzeCnpjService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/pixanalyser.AiAnalyzeCnpjService/AiAnalyzeCnpj',
-            ai__analyze__cnpj_dot_ai__analyze__cnpj__pb2.AiAnalyzeCnpjRequest.SerializeToString,
-            ai__analyze__cnpj_dot_ai__analyze__cnpj__pb2.AiAnalyzeCnpjResponse.FromString,
+            '/pixanalyzer.AiAnalyzeCnpjService/AiAnalyzeCnpj',
+            ai__analyze__cnpj__pb2.AiAnalyzeCnpjRequest.SerializeToString,
+            ai__analyze__cnpj__pb2.AiAnalyzeCnpjResponse.FromString,
             options,
             channel_credentials,
             insecure,
