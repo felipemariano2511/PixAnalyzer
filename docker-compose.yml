@@ -10,6 +10,7 @@ services:
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/ssl:/etc/nginx/ssl:ro 
+      - webapp-dist:/usr/share/nginx/html/web-app:ro
     ports:
       - '80:80'
       - '443:443'
@@ -116,6 +117,16 @@ services:
       working_dir: /app/ai_analyze
       command: ["python", "grpc_interface/server.py"]
 
+  web-app:
+    build: ./web-app/PixAnalyzer
+    container_name: web_app
+    depends_on:
+      - pix-analyzer
+    volumes:
+    - webapp-dist:/app/dist
+    networks:
+      - public_network
+      
 networks:
   private_network:
     driver: bridge
@@ -124,3 +135,4 @@ networks:
 
 volumes:
   pgdata:
+  webapp-dist:
