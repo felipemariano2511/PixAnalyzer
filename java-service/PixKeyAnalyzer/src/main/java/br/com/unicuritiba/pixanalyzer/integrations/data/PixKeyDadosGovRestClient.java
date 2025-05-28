@@ -1,7 +1,7 @@
 package br.com.unicuritiba.pixanalyzer.integrations.data;
 
-import br.com.unicuritiba.pixanalyzer.dto.DadosGovResponseDto;
-import br.com.unicuritiba.pixanalyzer.dto.DadosGovResponseWrapperDto;
+import br.com.unicuritiba.pixanalyzer.domain.dto.DadosGovResponseDto;
+import br.com.unicuritiba.pixanalyzer.domain.dto.DadosGovResponseWrapperDto;
 import br.com.unicuritiba.pixanalyzer.infrastructure.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
