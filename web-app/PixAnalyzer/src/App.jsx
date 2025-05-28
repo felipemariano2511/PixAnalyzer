@@ -6,8 +6,8 @@ import PixConfirmationScreen from "../src/components/PixConfirmationScreen/PixCo
 
 function App() {
   return (
-    <Router>
-      <Routes basename="/web-app">
+    <Router basename="/web-app">
+      <Routes>
         <Route path="/home" element={<PixInputScreen />} />
         <Route path="/valor" element={<PixTransactionScreen />} />
         <Route path="/conta" element={<PixAccountScreen />} />

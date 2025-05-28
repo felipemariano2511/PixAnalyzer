@@ -8,12 +8,12 @@ export const buscarDadosDaChavePix = (destinationKeyValue, originClientId) => {
   return api.post('/info-chave-pix', { destinationKeyValue, originClientId });
 };
 
-export const consultarAvaliacaoIA = (destinationKeyValue, originClientId, amout, description) => {
-  return api.post('/analisar', { destinationKeyValue, originClientId, amout, description });
+export const consultarAvaliacaoIA = (destinationKeyValue, originClientId, amount, description) => {
+  return api.post('/analisar', { destinationKeyValue, originClientId, amount, description });
 };
 
-export const realizarTransferenciaPix = (chavePix, valor, usuario) => {
-  return api.post('/transferir', { chavePix, valor, usuario });
+export const realizarTransferenciaPix = (destinationKeyValue, originClientId, amount, description) => {
+  return api.post('/transferir', { destinationKeyValue, originClientId, amount, description });
 };
 
 export default api;

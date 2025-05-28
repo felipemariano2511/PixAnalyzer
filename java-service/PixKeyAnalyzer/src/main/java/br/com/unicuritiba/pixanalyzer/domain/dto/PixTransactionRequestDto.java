@@ -16,9 +16,6 @@ public class PixTransactionRequestDto {
 
     private String destinationKeyValue;
     private Long originClientId;
-
-    @JsonDeserialize(using = NumberDeserializers.BigDecimalDeserializer.class)
     private BigDecimal amount;
-
     private String description;
 }

@@ -189,7 +189,7 @@ const PixAccountScreen = () => {
           Continuar
         </Link>
 
-        <Link to="/" className={styles.cancelButton}>
+        <Link to="/home" className={styles.cancelButton}>
           Cancelar
         </Link>
       </div>

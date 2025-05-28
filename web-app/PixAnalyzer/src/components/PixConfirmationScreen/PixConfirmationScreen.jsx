@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./PixConfirmationScreen.module.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiFileText } from "react-icons/fi";
@@ -9,34 +9,41 @@ function PixConfirmationScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const dadosPix = location.state?.dados || {};
-  const valor = location.state?.valor || "";
+  const pixData = JSON.parse(localStorage.getItem("consultaIA") || "{}");
+
+  const dadosPix = location.state?.dadosPix || {};
+  const valor = location.state?.valor || "0,00";
+  const valorNumerico = parseFloat(valor.replace(".", "").replace(",", "."));
+
+  useEffect(() => {
+    if (pixData?.aiAnalyze?.confidenceScore < 0.7) {
+      alert("Avaliação de confiança baixa. Por favor, só realize a transferência se realmente confiar no destinatário.");
+    }
+  }, []);
 
   const handleConfirmar = async () => {
     setLoading(true);
     setError("");
 
     try {
-      const response = await fetch("https://api.seubanco.com/pix/realizar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nome: dadosPix.nome,
-          documento: dadosPix.documento,
-          instituicao: dadosPix.instituicao,
-          valor: Number(valor),
-        }),
-      });
+      const response = await consultarAvaliacaoIA(
+        pixData.destinationKeyValue,
+        pixData.originClientId,
+        valorNumerico,
+        "teste"
+      );
 
-      if (!response.ok) throw new Error("Erro ao processar a transferência");
+      const dados = response.data.body;
 
-      const resultado = await response.json();
-
-      navigate("/pix/sucesso", { state: { resultado } });
+      if (dados) {
+        console.log("Dados da chave:", dados);
+        navigate("/home", { state: { dados } });
+      } else {
+        alert("Chave Pix inválida ou não encontrada.");
+      }
     } catch (err) {
-      setError("Não foi possível concluir a transferência. Tente novamente.");
-    } finally {
-      setLoading(false);
+      console.error("Erro ao buscar chave:", err);
+      alert("Erro ao transferir pix.");
     }
   };
 
@@ -136,13 +143,10 @@ function PixConfirmationScreen() {
 
         {error && <div className={styles.errorMessage}>{error}</div>}
 
-        <button
-          className={styles.confirmButton}
-          onClick={handleConfirmar}
-          disabled={loading}
-        >
-          {loading ? "Enviando..." : "Confirmar"}
+        <button className={styles.continueButton} onClick={handleContinue}>
+               Continuar
         </button>
+        <button className={styles.cancelButton}>Cancelar</button>
       </div>
     </div>
   );
