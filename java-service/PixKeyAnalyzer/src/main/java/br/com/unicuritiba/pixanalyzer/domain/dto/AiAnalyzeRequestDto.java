@@ -1,17 +1,15 @@
-package br.com.unicuritiba.pixanalyzer.dto;
+package br.com.unicuritiba.pixanalyzer.domain.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class PixTransactionRequestDto {
-
+public class AiAnalyzeRequestDto {
     private String destinationKeyValue;
     private Long originClientId;
     private BigDecimal amount;
-    private String description;
+    private Timestamp timestamp;
 }

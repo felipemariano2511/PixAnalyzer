@@ -2,8 +2,8 @@ package br.com.unicuritiba.pixanalyzer.application.services;
 
 import br.com.unicuritiba.pixanalyzer.AiAnalyzeCnpjResponse;
 import br.com.unicuritiba.pixanalyzer.AiAnalyzeCpfResponse;
+import br.com.unicuritiba.pixanalyzer.domain.dto.*;
 import br.com.unicuritiba.pixanalyzer.domain.repositories.ClientRepository;
-import br.com.unicuritiba.pixanalyzer.dto.*;
 import br.com.unicuritiba.pixanalyzer.integrations.data.PixKeyDadosGovRestClient;
 import br.com.unicuritiba.pixanalyzer.integrations.data.PixKeyReceitaFederalCnpjRestClient;
 import br.com.unicuritiba.pixanalyzer.integrations.pix.PixKeyDictApiRestClient;
