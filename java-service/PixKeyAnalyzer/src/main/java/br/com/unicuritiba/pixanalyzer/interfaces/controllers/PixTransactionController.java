@@ -1,14 +1,15 @@
-package br.com.unicuritiba.pixanalyzer.controllers;
+package br.com.unicuritiba.pixanalyzer.interfaces.controllers;
 
 import br.com.unicuritiba.pixanalyzer.application.services.AiAnalyzeService;
 import br.com.unicuritiba.pixanalyzer.application.services.InfoTransactionService;
 import br.com.unicuritiba.pixanalyzer.application.services.PixTransactionService;
-import br.com.unicuritiba.pixanalyzer.dto.AiAnalyzeRequestDto;
-import br.com.unicuritiba.pixanalyzer.dto.PixTransactionRequestDto;
+import br.com.unicuritiba.pixanalyzer.domain.dto.AiAnalyzeRequestDto;
+import br.com.unicuritiba.pixanalyzer.domain.dto.PixTransactionRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/transferencia/pix")
 public class PixTransactionController {
