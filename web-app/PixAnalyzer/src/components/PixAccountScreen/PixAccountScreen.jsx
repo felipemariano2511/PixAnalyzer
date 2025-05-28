@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import styles from "./PixAccountScreen.module.css";
 import { Link } from "react-router-dom";
-import {
-  FaEye,
-  FaEyeSlash,
-  FaInfoCircle,
-  FaChevronLeft,
-} from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaInfoCircle, FaChevronLeft } from "react-icons/fa";
 
 const PixAccountScreen = () => {
   const [selectedAccount, setSelectedAccount] = useState("contaCorrente");
@@ -25,7 +20,7 @@ const PixAccountScreen = () => {
       <div className={styles.pixHeader}>
         <div className={styles.headerContent}>
           <Link to="/valor" className={styles.backButton}>
-            <FaChevronLeft className={styles.backIcon} />
+            &lt;
           </Link>
           <h1>Pix</h1>
 
@@ -42,33 +37,33 @@ const PixAccountScreen = () => {
           viewBox="0 0 1440 120"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
-                      style={{
-              position: "absolute",
-              bottom: "-50px",
-              left: 0,
-              width: "100%",
-              height: "70px",
-              transform: "rotate(180deg)",
-              zIndex: 1,
-              pointerEvents: "none",
-            }}
+          style={{
+            position: "absolute",
+            bottom: "-50px",
+            left: 0,
+            width: "100%",
+            height: "70px",
+            transform: "rotate(180deg)",
+            zIndex: 1,
+            pointerEvents: "none",
+          }}
         >
-           <g transform="translate(70, 0)" >
+          <g transform="translate(70, 0)">
             <path
               d="M0,150 Q720,-150 1440,175 L1440,120 L0,120 Z"
               fill="rgba(227, 60, 79, 0.3)"
-              
             />
-           </g>
-           <g transform="translate(300, 0)">
+          </g>
+          <g transform="translate(300, 0)">
             <path
               d="M0,155 Q720,-120 1440,130 L1440,120 L0,120 Z"
               fill="rgba(227, 60, 79, 0.3)"
             />
-           </g>
-            <path d="M0,29  Q360,-10 720,30  Q1080,70 1440,40  L1440,120  L0,120  Z"
+          </g>
+          <path
+            d="M0,29  Q360,-10 720,30  Q1080,70 1440,40  L1440,120  L0,120  Z"
             fill="rgba(204, 9, 47, 0.97)"
-            />
+          />
         </svg>
       </div>
 
@@ -97,11 +92,12 @@ const PixAccountScreen = () => {
             >
               {showBalance ? (
                 <>
-                   Esconder Saldo <FaEye className={styles.eyeButton} />
+                  Esconder Saldo <FaEye className={styles.eyeButton} />
                 </>
               ) : (
                 <>
-                  Mostrar Saldo  <FaEyeSlash className={styles.eyeButtonHidden} />
+                  Mostrar Saldo{" "}
+                  <FaEyeSlash className={styles.eyeButtonHidden} />
                 </>
               )}
             </button>
@@ -126,9 +122,7 @@ const PixAccountScreen = () => {
                   Saldo disponível:{" "}
                   <span
                     className={
-                      showBalance
-                        ? styles.visibleBalance
-                        : styles.maskedBalance
+                      showBalance ? styles.visibleBalance : styles.maskedBalance
                     }
                   >
                     R$ 1.234,56
@@ -157,9 +151,7 @@ const PixAccountScreen = () => {
                   Saldo disponível:{" "}
                   <span
                     className={
-                      showBalance
-                        ? styles.visibleBalance
-                        : styles.maskedBalance
+                      showBalance ? styles.visibleBalance : styles.maskedBalance
                     }
                   >
                     R$ 789,01
@@ -193,8 +185,11 @@ const PixAccountScreen = () => {
       </div>
 
       <div className={styles.pixFooter}>
-        <button className={styles.continueButton}>Continuar</button>
-        <Link to="/cancelar" className={styles.cancelButton}>
+        <Link to="/confirmar" className={styles.continueButton}>
+          Continuar
+        </Link>
+
+        <Link to="/" className={styles.cancelButton}>
           Cancelar
         </Link>
       </div>

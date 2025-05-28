@@ -1,0 +1,247 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+}
+
+.pixContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.pixHeader {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #8b008b 0%,
+    #8b008b 45%,
+    #9e006e 52%,
+    #b1123a 60%,
+    #cc092f 70%,
+    #cc092f 100%
+  );
+  overflow: visible;
+  padding-bottom: 30px;
+  z-index: 0;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  margin: 0 auto;
+  max-width: 400px;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.backButton {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 55px;
+  margin-top: -23px;
+}
+
+.mainTitle {
+  color: white;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.content {
+  background-color: #ffffff;
+  padding: 18px 20px;
+  border-radius: 14px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin: -55px auto 0 auto; /* Aumentei ainda mais a margem superior negativa */
+  position: relative;
+  z-index: 5;
+  width: 80%; /* Diminuí a largura */
+  max-width: 300px; /* Diminuí a largura máxima */
+  flex-direction: column;
+  transform: translateY(30px); /* Deslocamento vertical de 15px */
+}
+
+.transactionDetails {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.detailsHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  color: #555;
+  font-weight: bold;
+}
+
+.detailsHeader svg {
+  margin-right: 8px;
+}
+
+.detailItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+  width: 100%;
+}
+
+.detailItem:last-child {
+  border-bottom: none;
+}
+
+.detailItem .label {
+  color: #777;
+}
+
+.detailItem .value {
+  color: #333;
+  font-weight: 500;
+}
+
+.blurred {
+  filter: blur(5px);
+}
+
+.options {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.checkboxContainer {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #555;
+}
+
+.checkboxContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 22px;
+  width: 22px;
+  background-color: #eee;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.checkboxContainer:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.checkboxContainer input:checked ~ .checkmark {
+  background-color: #cc092f;
+  border: none;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkboxContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkboxContainer .checkmark:after {
+  left: 7px;
+  top: 4px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.paymentMethod,
+.paymentDate {
+  padding: 10px 0;
+  color: #555;
+  font-size: 16px;
+  width: 100%;
+}
+
+.paymentMethod .value,
+.paymentDate .value {
+  font-weight: 500;
+  color: #333;
+}
+
+.confirmButton {
+  background-color: #cc092f;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.confirmButton:hover {
+  background-color: #9e0202;
+}
+
+.navigationBar {
+  display: none;
+}

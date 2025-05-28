@@ -1,39 +1,50 @@
 import styles from "./PixTransactionScreen.module.css";
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation , useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaInfoCircle } from "react-icons/fa";
-import { postBuscarDadosChavePix } from "../../api/clientApi";
+import {consultarAvaliacaoIA} from "../../api/api";
 
 function PixTransactionScreen() {
-  const location = useLocation();
-  const { destinationKeyValue, originClientId } = location.state || {};
-
   const [amount, setAmount] = useState("");
   const [showBalance, setShowBalance] = useState(false);
-  const [apiData, setApiData] = useState(null);
+  const navigate = useNavigate();
+  //const [pixData, setPixData] = useState(null);
+
+  const pixData = JSON.parse(localStorage.getItem('dados') || '[]')
+  console.log(pixData)
+
+    const handleContinue = async () => {
+    
+      try {
+        const response = await consultarAvaliacaoIA(pixData.destinationKeyValue, pixData.originClientId, amount, "teste");
+        const dados = response.data.body;
+  
+        console.log(response)
+        if (dados && dados.originClientName) {
+          console.log("Dados da chave:", dados);
+          localStorage.setItem('consultaIA', JSON.stringify(dados));
+          navigate("/conta", { state: { dados } });
+  
+        } else {
+          setError("Chave Pix inválida ou não encontrada.");
+        }
+      } catch (err) {
+        console.error("Erro ao buscar chave:", err);
+      } 
+    };
+    
 
   const toggleBalanceVisibility = () => setShowBalance(!showBalance);
-
-  useEffect(() => {
-    if (!destinationKeyValue || !originClientId) return;
-
-    postBuscarDadosChavePix({ destinationKeyValue, originClientId })
-      .then((res) => {
-        setApiData(res.data.body);
-      })
-      .catch((err) => {
-        console.error("Erro ao buscar dados da chave Pix:", err);
-      });
-  }, [destinationKeyValue, originClientId]);
 
   return (
     <div className={styles.pixContainer}>
       <div className={styles.pixHeader}>
         <div className={styles.headerContent}>
-          <Link to="/" className={styles.backButton}>
-            <span className={styles.backArrow}>←</span>
+          <Link to="/home" className={styles.backButton}>
+            &lt;
           </Link>
           <h1>Pix</h1>
+
           <div className={styles.infoBar}>
             <FaInfoCircle className={styles.infoIcon} />
             <Link to="#" className={styles.infoLink}>
@@ -79,29 +90,24 @@ function PixTransactionScreen() {
 
       <div className={styles.pixBody}>
         <div className={styles.pixBodyInner}>
-          <div className={styles.recipientInfoCard}>
-            <div className={styles.iconContainer}>S$</div>
-            <div className={styles.recipientDetails}>
-              <p className={styles.recipientName}>
-                Pix para:{" "}
-                <span className={styles.bold}>
-                  {apiData?.receiverName || "Carregando..."}
-                </span>
-              </p>
-              <p className={styles.recipientId}>
-                CPF/CNPJ:{" "}
-                <span className={styles.blurred}>
-                  {apiData?.taxIdNumber || "***.***.***-**"}
-                </span>
-              </p>
-              <p className={styles.recipientInstitution}>
-                Instituição:{" "}
-                <span className={styles.blurred}>
-                  {apiData?.destinationBank || "***"}
-                </span>
-              </p>
+          {pixData ? (
+            <div className={styles.recipientInfoCard}>
+              <div className={styles.iconContainer}>S$</div>
+              <div className={styles.recipientDetails}>
+                <p className={styles.recipientName}>
+                  Pix para: <span className={styles.bold}>{pixData.receiverName}</span>
+                </p>
+                <p className={styles.recipientId}>
+                  CPF/CNPJ: <span className={styles.blurred}>{pixData.taxIdNumber}</span>
+                </p>
+                <p className={styles.recipientInstitution}>
+                  Instituição: <span className={styles.blurred}>{pixData.destinationBank}</span>
+                </p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <p>Carregando dados do destinatário...</p>
+          )}
 
           <section className={styles.amountSection}>
             <label htmlFor="amountInput" className={styles.amountLabel}>
@@ -153,11 +159,9 @@ function PixTransactionScreen() {
             <div className={styles.balanceLabel}>Saldo disponível:</div>
             <div className={styles.balanceValue}>
               <span
-                className={`${styles.balanceText} ${
-                  !showBalance ? styles.hiddenBalance : ""
-                }`}
+                className={`${styles.balanceText} ${!showBalance ? styles.hiddenBalance : ""}`}
               >
-                R$ {showBalance && apiData ? apiData.balance.toFixed(2) : "*****"}
+                {pixData.balance}
               </span>
               <button
                 onClick={toggleBalanceVisibility}
@@ -170,7 +174,7 @@ function PixTransactionScreen() {
 
           <section className={styles.scheduleSection}>
             <div className={styles.scheduleInfo}>
-              <div className={styles.scheduleLabel}>Para quando?</div>
+              <div className={styles.scheduleLabel}>Pra quando?</div>
               <div className={styles.scheduleDate}>30/04/2025</div>
             </div>
             <div className={styles.repeatWrapper}>
@@ -180,17 +184,12 @@ function PixTransactionScreen() {
           </section>
 
           <div className={styles.actionButtons}>
-            <Link
-              to="/conta"
-              className={`${styles.continueButton} ${
-                Number(amount) <= 0 ? styles.disabled : ""
-              }`}
-              onClick={(e) => {
-                if (Number(amount) <= 0) e.preventDefault();
-              }}
-            >
-              Continuar
-            </Link>
+        <button
+          className={styles.continueButton}
+          onClick={handleContinue}
+        >
+          {"Continuar"}
+        </button>
 
             <button className={styles.cancelButton}>Cancelar</button>
           </div>
