@@ -17,3 +17,4 @@ export const realizarTransferenciaPix = (destinationKeyValue, originClientId, am
 };
 
 export default api;
+

@@ -16,8 +16,16 @@ function PixConfirmationScreen() {
   const valorNumerico = parseFloat(valor.replace(".", "").replace(",", "."));
 
   useEffect(() => {
+    if (!location.state || !location.state.valor) {
+      navigate("/valor");
+    }
+  }, [location, navigate]);
+
+  useEffect(() => {
     if (pixData?.aiAnalyze?.confidenceScore < 0.7) {
-      alert("Avaliação de confiança baixa. Por favor, só realize a transferência se realmente confiar no destinatário.");
+      alert(
+        "Avaliação de confiança baixa. Por favor, só realize a transferência se realmente confiar no destinatário."
+      );
     }
   }, []);
 
@@ -33,10 +41,10 @@ function PixConfirmationScreen() {
         "teste"
       );
 
-      const dados = response.data.body;
+      const consultaIA = response.data.body;
 
-      if (dados) {
-        console.log("Dados da chave:", dados);
+      if (consultaIA) {
+        console.log("Dados da chave:", consultaIA);
         navigate("/home", { state: { dados } });
       } else {
         alert("Chave Pix inválida ou não encontrada.");
@@ -51,7 +59,9 @@ function PixConfirmationScreen() {
     <div className={styles.pixContainer}>
       <div className={styles.pixHeader}>
         <div className={styles.headerContent}>
-          <Link to="/conta" className={styles.backButton}>&lt;</Link>
+          <Link to="/valor" className={styles.backButton}>
+            &lt;
+          </Link>
           <h1>Pix</h1>
         </div>
         <h2 className={styles.mainTitle}>Agora, é só confirmar</h2>
@@ -99,7 +109,9 @@ function PixConfirmationScreen() {
           </div>
           <div className={styles.detailItem}>
             <span className={styles.label}>Nome</span>
-            <span className={styles.value}>{dadosPix.nome}</span>
+            <span className={styles.value}>
+              {pixData.transactionInformation.receiverName}
+            </span>
           </div>
           <div className={styles.detailItem}>
             <span className={styles.label}>Valor</span>
@@ -143,10 +155,10 @@ function PixConfirmationScreen() {
 
         {error && <div className={styles.errorMessage}>{error}</div>}
 
-        <button className={styles.continueButton} onClick={handleContinue}>
-               Continuar
-        </button>
-        <button className={styles.cancelButton}>Cancelar</button>
+        <button className={styles.confirmButton}>Continuar</button>
+        <Link to="/home" className={styles.cancelButton}>
+          Cancelar
+        </Link>
       </div>
     </div>
   );

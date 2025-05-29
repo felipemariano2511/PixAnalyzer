@@ -18,25 +18,38 @@ function PixTransactionScreen() {
       alert("Informe um valor válido.");
       return;
     }
-
+  
     try {
+      const dadosTransacao = {
+        receiverId: pixData.receiverId,
+        destinationKeyValue: pixData.destinationKeyValue,
+        originClientId: pixData.originClientId,
+        valor: valorNumerico,
+        observacao: "teste",
+      };
+  
       const response = await consultarAvaliacaoIA(
-        pixData.destinationKeyValue,
-        pixData.originClientId,
-        valorNumerico,
-        "teste"
+        dadosTransacao.destinationKeyValue,
+        dadosTransacao.originClientId,
+        dadosTransacao.valor,
+        dadosTransacao.observacao
       );
-      const dados = response.data.body;
-      localStorage.setItem("dadosTransacao", JSON.stringify(
-                pixData.receiverId,
-                pixData.destinationKeyValue,
-                valorNumerico,
-                "teste"));
-
-      if (dados) {
-        console.log("Dados da chave:", dados);
-        localStorage.setItem("consultaIA", JSON.stringify(dados));
-        navigate("/conta", { state: { dados } });
+  
+      const dadosIA = response.data.body;
+  
+      if (dadosIA) {
+        localStorage.setItem("consultaIA", JSON.stringify(dadosIA));
+  
+        navigate("/confirmar", {
+          state: {
+            dadosPix: {
+              chave: dadosTransacao.destinationKeyValue,
+              documento: pixData.taxIdNumber,
+              instituicao: pixData.destinationBank,
+            },
+            valor: amount,
+          },
+        });
       } else {
         alert("Chave Pix inválida ou não encontrada.");
       }
@@ -164,14 +177,10 @@ function PixTransactionScreen() {
                 onChange={(e) => {
                   let raw = e.target.value;
 
-                  // Remove tudo que não é dígito ou vírgula
                   raw = raw.replace(/[^\d,]/g, "");
-
-                  // Garante no máximo uma vírgula
                   const parts = raw.split(",");
                   if (parts.length > 2) return;
 
-                  // Limita a 2 casas decimais
                   if (parts[1]?.length > 2) {
                     parts[1] = parts[1].slice(0, 2);
                   }
@@ -213,7 +222,10 @@ function PixTransactionScreen() {
                     })}`
                   : ""}
               </span>
-              <button onClick={toggleBalanceVisibility} className={styles.eyeButton}>
+              <button
+                onClick={toggleBalanceVisibility}
+                className={styles.eyeButton}
+              >
                 {showBalance ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
@@ -234,7 +246,9 @@ function PixTransactionScreen() {
             <button className={styles.continueButton} onClick={handleContinue}>
               Continuar
             </button>
-            <button className={styles.cancelButton}>Cancelar</button>
+            <Link to="/home" className={styles.cancelButton}>
+              Cancelar
+            </Link>
           </div>
         </div>
       </div>
