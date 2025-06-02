@@ -312,7 +312,7 @@ h1 {
   background: none;
   border: none;
   padding: 0;
-  margin: 0;
+  margin-right: 5px;
   font-size: 14px;
   color: #007bff;
   text-decoration: underline;
@@ -377,7 +377,7 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: center; /* centraliza horizontalmente */
+  align-items: center;
   margin-top: 10px;
 }
 
@@ -386,4 +386,26 @@ h1 {
   user-select: none;
   pointer-events: none;
   text-shadow: none;
+}
+
+.descriptionSection {
+  margin-top: 20px;
+  font-size: 5px;
+}
+
+.descriptionInput {
+  width: 95%;
+  height: 80px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  resize: none;
+  background-color: white;
+  color: #000;
+}
+
+.descriptionLabel {
+  font-size: 20px;
+  font-weight: bold;
 }

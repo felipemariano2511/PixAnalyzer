@@ -1,0 +1,46 @@
+/* AlertBanner.module.css */
+
+.overlay {
+  position: fixed; /* fixa na tela toda */
+  top: 0;
+  left: 0;
+  width: 100vw; /* largura total da viewport */
+  height: 100vh; /* altura total da viewport */
+  background: rgba(0, 0, 0, 0.4); /* fundo escuro translúcido */
+  backdrop-filter: blur(5px); /* efeito blur atrás do overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* fica na frente de tudo */
+}
+
+.banner {
+  background-color: #cc092f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.banner button {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 16px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.banner button:hover {
+  background-color: white;
+  color: #cc092f;
+}

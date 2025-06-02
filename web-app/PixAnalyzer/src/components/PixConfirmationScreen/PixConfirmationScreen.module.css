@@ -137,16 +137,6 @@ h1 {
   font-weight: 500;
 }
 
-.blurred {
-  filter: blur(5px);
-}
-
-.options {
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 0;
-}
-
 .checkboxContainer {
   display: block;
   position: relative;
@@ -244,4 +234,34 @@ h1 {
 
 .navigationBar {
   display: none;
+}
+
+.options {
+  width: 100%;
+  padding: 0;
+}
+
+.descriptionConfirm {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.descriptionConfirm span {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.descriptionConfirm p {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  word-wrap: break-word;
+  background-color: #c4c4c4;
+  border-radius: 5px;
+  padding: 5px;
+  white-space: pre-wrap;
+  font-size: 15px;
+  color: #333;
 }

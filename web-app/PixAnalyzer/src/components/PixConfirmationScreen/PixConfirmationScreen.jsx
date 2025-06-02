@@ -1,19 +1,35 @@
 import React, { useState, useEffect } from "react";
 import styles from "./PixConfirmationScreen.module.css";
+import { IoIosArrowBack } from "react-icons/io";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import AlertBanner from "../AlertBanner/AlertBanner";
 import { FiFileText } from "react-icons/fi";
+import { realizarTransferenciaPix } from "../../api/api";
 
 function PixConfirmationScreen() {
   const location = useLocation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showBanner, setShowBanner] = useState(false);
+  const descricao = location.state?.descricao || "";
+  const valor = location.state?.valor || "0,00";
+  const getDataAtualFormatada = () => {
+    const data = new Date();
+    const dia = String(data.getDate()).padStart(2, "0");
+    const mes = String(data.getMonth() + 1).padStart(2, "0");
+    const ano = data.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  };
 
   const pixData = JSON.parse(localStorage.getItem("consultaIA") || "{}");
+  const requestTransaction = JSON.parse(
+    localStorage.getItem("requestTransaction") || "{}"
+  );
+
+  console.log(pixData.transactionInformation.receiverName);
 
   const dadosPix = location.state?.dadosPix || {};
-  const valor = location.state?.valor || "0,00";
-  const valorNumerico = parseFloat(valor.replace(".", "").replace(",", "."));
 
   useEffect(() => {
     if (!location.state || !location.state.valor) {
@@ -23,35 +39,42 @@ function PixConfirmationScreen() {
 
   useEffect(() => {
     if (pixData?.aiAnalyze?.confidenceScore < 0.7) {
-      alert(
-        "Avaliação de confiança baixa. Por favor, só realize a transferência se realmente confiar no destinatário."
-      );
+      setShowBanner(true);
     }
   }, []);
+
+  console.log(pixData);
 
   const handleConfirmar = async () => {
     setLoading(true);
     setError("");
 
     try {
-      const response = await consultarAvaliacaoIA(
-        pixData.destinationKeyValue,
-        pixData.originClientId,
-        valorNumerico,
-        "teste"
+      const response = await realizarTransferenciaPix(
+        requestTransaction.destinationKeyValue,
+        requestTransaction.originClientId,
+        requestTransaction.amount,
+        requestTransaction.description
       );
 
-      const consultaIA = response.data.body;
+      const resultadoTransferencia = response.data.body;
 
-      if (consultaIA) {
-        console.log("Dados da chave:", consultaIA);
-        navigate("/home", { state: { dados } });
+      const success = response.data;
+
+      console.log("Ola", success);
+
+      if (success.statusCodeValue === 200) {
+        navigate("/sucesso", { state: { dados: dadosPix } });
       } else {
-        alert("Chave Pix inválida ou não encontrada.");
+        setError(
+          resultadoTransferencia?.message || "Erro ao realizar a transferência."
+        );
       }
     } catch (err) {
-      console.error("Erro ao buscar chave:", err);
-      alert("Erro ao transferir pix.");
+      console.error("Erro ao transferir pix:", err);
+      setError("Erro ao realizar a transferência.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,7 +83,7 @@ function PixConfirmationScreen() {
       <div className={styles.pixHeader}>
         <div className={styles.headerContent}>
           <Link to="/valor" className={styles.backButton}>
-            &lt;
+            <IoIosArrowBack />
           </Link>
           <h1>Pix</h1>
         </div>
@@ -143,6 +166,11 @@ function PixConfirmationScreen() {
           </label>
         </div>
 
+        <div className={styles.descriptionConfirm}>
+          <span>Observação:</span>
+          <p>{descricao || "Nenhuma observação foi inserida."}</p>
+        </div>
+
         <div className={styles.paymentMethod}>
           <span className={styles.label}>Debitar de</span>
           <span className={styles.value}> Conta-Poupança</span>
@@ -150,16 +178,24 @@ function PixConfirmationScreen() {
 
         <div className={styles.paymentDate}>
           <span className={styles.label}>Data do débito</span>
-          <span className={styles.value}> 30/04/2025 - hoje</span>
+          <span className={styles.value}> {getDataAtualFormatada()}</span>
         </div>
 
         {error && <div className={styles.errorMessage}>{error}</div>}
 
-        <button className={styles.confirmButton}>Continuar</button>
+        <button className={styles.confirmButton} onClick={handleConfirmar}>
+          Continuar
+        </button>
         <Link to="/home" className={styles.cancelButton}>
           Cancelar
         </Link>
       </div>
+      {showBanner && (
+        <AlertBanner
+          message="Alerta: Individuo suspeito detectado!! Aconselhamos que prossiga, apenas se confiar no individuo."
+          onClose={() => setShowBanner(false)}
+        />
+      )}
     </div>
   );
 }
