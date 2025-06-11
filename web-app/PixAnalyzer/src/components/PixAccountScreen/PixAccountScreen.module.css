@@ -60,7 +60,6 @@ h1 {
   align-items: center;
 }
 
-
 .infoBar {
   display: flex;
   align-items: center;
@@ -71,14 +70,12 @@ h1 {
 }
 
 .infoIcon {
-  margin-right: 8px;
-  font-size: 16px;
+  margin-right: 6px;
 }
 
 .infoLink {
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
+  color: #ffe0ff;
+  text-decoration: underline;
 }
 
 .wave {

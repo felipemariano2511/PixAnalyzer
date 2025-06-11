@@ -1,7 +1,7 @@
 package br.com.unicuritiba.pixanalyzer.integrations.data;
 
-import br.com.unicuritiba.pixanalyzer.dto.ReceitaFederalCnpjResponseDto;
-import br.com.unicuritiba.pixanalyzer.dto.ReceitaFederalCnpjResponseWrapperDto;
+import br.com.unicuritiba.pixanalyzer.domain.dto.ReceitaFederalCnpjResponseDto;
+import br.com.unicuritiba.pixanalyzer.domain.dto.ReceitaFederalCnpjResponseWrapperDto;
 import br.com.unicuritiba.pixanalyzer.infrastructure.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
