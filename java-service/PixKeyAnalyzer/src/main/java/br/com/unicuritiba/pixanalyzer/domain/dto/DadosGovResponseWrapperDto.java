@@ -1,4 +1,4 @@
-package br.com.unicuritiba.pixanalyzer.dto;
+package br.com.unicuritiba.pixanalyzer.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -9,10 +9,11 @@ html {
 .pixContainer {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
   width: 100vw;
   overflow-x: hidden;
   background-color: white;
+  overflow-y: auto;
 }
 
 .pixHeader {
@@ -48,12 +49,12 @@ h1 {
   font-size: 20px;
   font-weight: bold;
   margin-left: 55px;
-  margin-top: -10px;
+  margin-top: -23px;
 }
 
 .backButton {
   position: absolute;
-  top: -13px;
+  top: -10px;
   left: 20px;
   color: white;
   font-size: 24px;
@@ -163,7 +164,6 @@ h1 {
   border-bottom: 2px solid #000;
   padding-bottom: 6px;
   padding-left: 6px;
-
 }
 
 .currencyPrefix {
@@ -312,7 +312,7 @@ h1 {
   background: none;
   border: none;
   padding: 0;
-  margin: 0;
+  margin-right: 5px;
   font-size: 14px;
   color: #007bff;
   text-decoration: underline;
@@ -358,7 +358,6 @@ h1 {
   text-decoration: none;
 }
 
-
 .disabled {
   pointer-events: none;
   opacity: 0.5;
@@ -378,7 +377,7 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: center;  /* centraliza horizontalmente */
+  align-items: center;
   margin-top: 10px;
 }
 
@@ -389,3 +388,24 @@ h1 {
   text-shadow: none;
 }
 
+.descriptionSection {
+  margin-top: 20px;
+  font-size: 5px;
+}
+
+.descriptionInput {
+  width: 95%;
+  height: 80px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  resize: none;
+  background-color: white;
+  color: #000;
+}
+
+.descriptionLabel {
+  font-size: 20px;
+  font-weight: bold;
+}

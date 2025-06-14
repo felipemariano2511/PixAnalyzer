@@ -2,7 +2,7 @@ package br.com.unicuritiba.pixanalyzer.application.services;
 
 import br.com.unicuritiba.pixanalyzer.domain.models.InfoTransaction;
 import br.com.unicuritiba.pixanalyzer.domain.repositories.ClientRepository;
-import br.com.unicuritiba.pixanalyzer.dto.DictApiResponseDto;
+import br.com.unicuritiba.pixanalyzer.domain.dto.DictApiResponseDto;
 import br.com.unicuritiba.pixanalyzer.integrations.pix.PixKeyDictApiRestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

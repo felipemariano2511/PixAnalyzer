@@ -1,7 +1,7 @@
 package br.com.unicuritiba.pixanalyzer.integrations.pix;
 
-import br.com.unicuritiba.pixanalyzer.dto.DictApiResponseDto;
-import br.com.unicuritiba.pixanalyzer.dto.DictApiResponseWrapperDto;
+import br.com.unicuritiba.pixanalyzer.domain.dto.DictApiResponseDto;
+import br.com.unicuritiba.pixanalyzer.domain.dto.DictApiResponseWrapperDto;
 import br.com.unicuritiba.pixanalyzer.infrastructure.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
