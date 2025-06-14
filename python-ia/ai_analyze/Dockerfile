@@ -12,4 +12,8 @@ COPY . .
 
 ENV PYTHONPATH=/app/ai_analyze
 
+CMD ["python3", "-u", "data/cpf/train_model_pf.py"]
+
+CMD ["python3", "-u", "data/cnpj/train_model_pj.py"]
+
 CMD ["python3", "-u", "grpc_interface/server.py"]
