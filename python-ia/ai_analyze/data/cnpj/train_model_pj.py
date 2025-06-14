@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import joblib
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, MultiLabelBinarizer
@@ -37,7 +37,7 @@ score_model = Pipeline(steps=[
 
 fraud_model = Pipeline(steps=[
     ('preprocessor', preprocessor),
-    ('classifier', MultiOutputClassifier(RandomForestRegressor(n_estimators=200, random_state=42)))
+    ('classifier', MultiOutputClassifier(RandomForestClassifier(n_estimators=200, random_state=42)))
 ])
 
 score_model.fit(X_train, y_score_train)
