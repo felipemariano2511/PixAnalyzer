@@ -1,6 +1,6 @@
-package br.com.unicuritiba.pixanalyzer.infrastructure.configs;
+package br.com.unicuritiba.keysfrontapi.infrastructure.configs;
 
-import br.com.unicuritiba.pixanalyzer.domain.repositories.PixTransactionRepository;
+import br.com.unicuritiba.keysfrontapi.repositories.KeysFrontRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
@@ -11,21 +11,21 @@ import java.sql.Connection;
 import java.util.UUID;
 
 @Component
-public class PixTrasnsfersDataInitializer implements CommandLineRunner {
+public class KeysFrontDataInitializer implements CommandLineRunner{
 
     @Autowired
-    private PixTransactionRepository repository;
+    private KeysFrontRepository repository;
 
     private final DataSource dataSource;
 
-    public PixTrasnsfersDataInitializer(DataSource dataSource) {
+    public KeysFrontDataInitializer(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Override
     public void run(String... args) throws Exception {
         try (Connection connection = dataSource.getConnection()) {
-            var keyOptional = repository.findById(UUID.fromString("a0eb5057-65bd-4da1-ad54-e74dbd9ee3a5"));
+            var keyOptional = repository.findById(UUID.fromString("0ed4dcc4-3085-4242-a144-1cb4dc168951"));
 
             if(keyOptional.isEmpty()){
                 ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/data.sql"));

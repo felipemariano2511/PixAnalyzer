@@ -71,6 +71,22 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+  keys-front:
+    build: ./java-service/KeysFrontApi
+    container_name: keys_front
+    depends_on:
+      - wait-for-db
+    environment:
+      DB_HOST: db-postgres
+      DB_USER: postgres
+      DB_PASSWORD: 123456
+      POSTGRES_DB: keys_front
+    networks: 
+      - private_network
+      - public_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
   dados-gov:
     build: ./registro-nacional/DadosGov
     container_name: dados_gov
