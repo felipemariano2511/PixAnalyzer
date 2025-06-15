@@ -2,10 +2,12 @@ package br.com.unicuritiba.keysfrontapi.mappers;
 
 import br.com.unicuritiba.keysfrontapi.dto.KeysFrontResponseDTO;
 import br.com.unicuritiba.keysfrontapi.models.KeysFront;
+import org.springframework.stereotype.Component;
 
+@Component
 public class KeysFrontMapper {
 
-    public static KeysFrontResponseDTO toDTO(KeysFront entity) {
+    public KeysFrontResponseDTO toDTO(KeysFront entity) {
         if (entity == null) {
             return null;
         }

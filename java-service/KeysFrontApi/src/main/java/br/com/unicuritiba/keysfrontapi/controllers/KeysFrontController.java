@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/keys_front")
+@RequestMapping("/buscar_chaves")
 public class KeysFrontController {
 
     @Autowired

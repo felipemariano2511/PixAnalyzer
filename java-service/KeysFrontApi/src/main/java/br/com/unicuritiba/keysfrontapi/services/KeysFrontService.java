@@ -7,7 +7,6 @@ import br.com.unicuritiba.keysfrontapi.repositories.KeysFrontRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -16,11 +15,13 @@ public class KeysFrontService {
     @Autowired
     private KeysFrontRepository repository;
 
-    public ResponseEntity<KeysFrontResponseDTO> getAll(){
-        List<KeysFront> response = repository.findAll();
+    @Autowired
+    private KeysFrontMapper mapper;
 
-        return ResponseEntity.ok(KeysFrontMapper.toDTO((KeysFront) response));
+    public ResponseEntity<List<KeysFrontResponseDTO>> getAll(){
+        return ResponseEntity.ok(repository.findAll()
+                .stream()
+                .map(mapper::toDTO)
+                .toList());
     }
-
-
 }
