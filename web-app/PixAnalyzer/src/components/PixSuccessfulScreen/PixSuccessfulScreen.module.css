@@ -47,7 +47,7 @@ body,
 }
 
 .pix-content {
-  background-color: #f3e5f5; /* Rosa claro do conteúdo */
+  background-color: #f3e5f5;
   border-radius: 20px;
   padding: 25px;
   width: 100%;
@@ -66,74 +66,11 @@ body,
   margin-bottom: 25px;
 }
 
-.money-stack {
-  position: relative;
-}
-
-.money {
-  width: 70px;
-  height: 40px;
-  background-color: #8bc34a; /* Verde claro da nota */
-  border: 1px solid #689f38; /* Borda da nota */
-  border-radius: 5px;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  color: #388e3c; /* Cor do símbolo $ */
-}
-
-.money::before {
-  content: "$";
-  font-weight: bold;
-}
-
-.money-1 {
-  transform: rotate(-135deg);
-}
-
-.money-2 {
-  transform: translateX(15px) translateY(-5px) rotate(-135deg);
-  opacity: 1;
-}
-
-.check-icon {
-  font-size: 60px;
-  color: #4caf50;
-  margin: 0 30px;
-}
-
-.coins {
-  position: relative;
-  display: flex;
-}
-
-.coin {
-  width: 30px; /* Ajustado para o tamanho do desenho */
-  height: 30px; /* Ajustado para o tamanho do desenho */
-  background-color: #ffeb3b; /* Amarelo da moeda */
-  border: 1px solid #fdd835; /* Borda da moeda */
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  color: #f9a825; /* Cor do símbolo $ na moeda */
-  position: absolute;
-}
-
-.coin::before {
-  content: "$";
-  font-weight: bold;
-}
-
-.coin-1 {
-  transform: translateX(-10px) translateY(5px);
-}
-
-.coin-2 {
-  transform: translateX(10px) translateY(15px) scale(0.8);
+.pix-success-image {
+  width: 220px;
+  height: auto;
+  display: block;
+  margin: 0 auto 25px;
 }
 
 .info-area {
@@ -153,26 +90,43 @@ body,
   color: #757575;
 }
 
-.security-area {
-  text-align: center;
-  margin-bottom: 40px;
-  color: #757575;
+.security-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 360px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.color-bar {
+  width: 6px;
+  height: 100%;
+  background-color: #cc092f;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.security-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  width: 100%;
 }
 
 .security-text {
   font-size: 16px;
-  margin-bottom: 5px;
+  font-weight: 500;
+  color: #333;
 }
 
-.protected-area {
-  font-weight: bold;
-  color: #212121;
-  display: inline-flex;
-  align-items: center;
-}
-
-.protected-text {
-  margin-right: 5px;
+.security-icon {
+  font-size: 20px;
+  margin-left: 10px;
 }
 
 .actions-area {
@@ -208,6 +162,7 @@ body,
 
 .action-label {
   flex-grow: 1;
+  color: black;
 }
 
 .action-arrow {
@@ -233,25 +188,27 @@ body,
   border-radius: 50%;
 }
 
-.navigation-dots {
-  display: flex;
-  justify-content: space-around;
-  width: 30%;
-  max-width: 150px;
-  padding: 20px 0;
-  position: fixed;
-  bottom: 20px;
+@keyframes heartbeat {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  60% {
+    transform: scale(0.9);
+  }
+  80% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.nav-dot {
-  width: 12px;
-  height: 12px;
-  background-color: #f3e5f5;
-  border-radius: 50%;
-  opacity: 0.7;
-}
-
-.nav-dot.active {
-  background-color: white;
-  opacity: 1;
+.pix-success-image {
+  animation: heartbeat 1.2s ease forwards;
 }

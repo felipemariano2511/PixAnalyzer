@@ -1,12 +1,12 @@
-body,
-html {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   background-color: #ffffff;
 }
 
-.pix-container {
+.pix-conteiner {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -14,7 +14,6 @@ html {
   overflow-x: hidden;
   background-color: white;
 }
-
 
 .pix-header {
   position: relative;
@@ -38,17 +37,17 @@ h1 {
   color: white;
   font-size: 24px;
   position: absolute;
-  top: 20px;
+  top: 24px;
   left: 20px;
 }
 
 .info-bar {
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 10px;
   font-size: 14px;
-  color: white;
 }
 
 .info-bar .info-icon {
@@ -84,16 +83,14 @@ h1 {
 .repeat-button,
 .continue-button,
 .cancel-button {
-  color: #333; /* ou #333, se quiser um pouco mais claro */
+  color: #333;
 }
-
-
 
 .recipient-info-card {
   background-color: #ffffff;
   padding: 16px;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   display: flex;
   gap: 12px;
   align-items: center;
@@ -103,7 +100,7 @@ h1 {
   background-color: #d8f8e2;
   color: #00b37e;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   padding: 10px;
   border-radius: 50%;
 }
@@ -141,7 +138,7 @@ h1 {
 }
 
 .amount-input:focus {
-  border-bottom: 2px solid #000000; /* Azul ao focar */
+  border-bottom: 2px solid #000000;
 }
 
 .amount-input::-webkit-inner-spin-button,
@@ -181,84 +178,3 @@ h1 {
 .quick-amount-buttons button:hover {
   background-color: #e6f0ff;
 }
-
-.balance-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.balance-label {
-  font-weight: bold;
-}
-
-.balance-value {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.eye-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #666;
-  font-size: 18px;
-}
-
-.schedule-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.schedule-label {
-  font-weight: bold;
-}
-
-.repeat-button {
-  background: none;
-  border: none;
-  color: #666;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.action-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.continue-button {
-  background-color: #ccc;
-  color: white;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  width: 100%;
-  cursor: pointer;
-}
-
-.continue-button:enabled {
-  background-color: #d00080;
-}
-
-.cancel-button {
-  background: none;
-  border: none;
-  color: #007bff;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.hidden-balance {
-  background-color: #f2f2f2;
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-weight: bold;
-  user-select: none;
-}
-
