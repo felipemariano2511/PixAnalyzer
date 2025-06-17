@@ -1,78 +1,95 @@
-# 🔐 Pix Key Analyzer – Avaliação Inteligente de Chaves Pix
+# 📌 Projeto: Análise de Confiabilidade de Chaves Pix com IA
 
-Este projeto simula a API DICT do Banco Central e utiliza inteligência artificial para avaliar a confiabilidade de chaves Pix (CPF, CNPJ, e-mail ou telefone). É uma plataforma moderna, escalável e modular, com foco em segurança digital, prevenção de fraudes e validação de identidade.
+## 🚀 Descrição Geral
 
----
-
-## 💡 Motivação
-
-Com o crescimento do uso do Pix no Brasil, também aumentaram os golpes e fraudes com uso de chaves falsas ou maliciosas. Este projeto nasce como uma resposta a esse problema: permitir que sistemas consultem uma chave Pix e recebam uma **avaliação de risco baseada em IA**, simulando uma estrutura próxima ao funcionamento real da API DICT do Banco Central.
+Este projeto tem como objetivo analisar a confiabilidade de chaves Pix (CPF, CNPJ, telefone, e-mail, etc) utilizando uma Inteligência Artificial. A aplicação recebe dados de transações Pix, processa essas informações e retorna ao usuário um score de confiabilidade, junto com os motivos para eventuais suspeitas de fraude.
 
 ---
 
-## 🎯 Objetivo
+## 🖥️ Apresentação
 
-- Simular a consulta à API DICT para qualquer tipo de chave Pix.
-- Armazenar o histórico de consultas e dados associados em banco de dados.
-- Consultar fontes externas públicas (ex: Receita Federal, Serpro, etc.).
-- Enviar os dados a um modelo de IA que analisa e retorna um **score de confiabilidade**.
-- Expôr uma API REST unificada para consumo por sistemas terceiros.
-
----
-
-## ⚙️ Funcionalidades
-
-- ✅ Consulta de chave Pix (CPF, CNPJ, telefone, e-mail)
-- ✅ Simulação da resposta DICT oficial
-- ✅ Integração entre microserviços com Docker
-- ✅ Persistência de dados em PostgreSQL
-- ✅ Serviço de IA (Python) que retorna score de confiabilidade
-- 🔄 Integração futura com bases reais (Receita, CNPJ, etc.)
-- 🔐 Segurança, auditoria e possível autenticação via JWT (em roadmap)
+**Título:** Análise de Confiabilidade de Chaves Pix com IA  
+**Desenvolvido por:**  
+[Felipe Mariano](https://github.com/felipemariano2511),  
+[Matheus Henrique](https://github.com/MatheusHAB),  
+[Ramon Romano](https://github.com/ramon-romano) e  
+[Vinícius Stencel](https://github.com/viniciusstencel).
 
 ---
 
-## 🧱 Arquitetura Geral
+## ⚠️ Problema
 
-### Fluxo de uma requisição:
-
-1. Um sistema cliente envia uma chave Pix para o endpoint `/pix/{chave}`.
-2. O `java-service` consulta o `dict-api`, simula os dados DICT e armazena no PostgreSQL.
-3. Em seguida, os dados são enviados para o `python-ia`, que retorna um score de confiabilidade.
-4. A resposta final inclui os dados da chave e o score calculado.
+- Em janeiro, 324.752 fraudes via Pix foram confirmadas no Brasil, cerca de 8 vítimas por minuto.  
+- Fraudes com empresas falsas usando Pix ocorrem diariamente, e as soluções atuais só reagem depois do prejuízo.
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## 💡 Solução
 
-- **Java 21** + Spring Boot 3 (REST API, banco, DICT)
-- **Python 3.11** + FastAPI (serviço de IA)
-- **PostgreSQL** (armazenamento)
-- **Docker** + Docker Compose (orquestração)
-- **JSON + HTTP REST**
+- Desenvolvemos o PixAnalyzer, sistema inteligente que analisa a confiabilidade da chave Pix antes da transação.  
+- Coleta dados públicos e comportamentais, envia para uma IA treinada com milhares de casos reais.  
+- A IA gera um score de risco e motivos de alerta, permitindo que o usuário seja avisado antes de confirmar o pagamento.
 
 ---
 
-## 📡 Exemplo de Requisição
+## 🌟 Impactos e Benefícios
 
-### Endpoint
+- Usuários ganham proteção e confiança nas transações Pix.  
+- Instituições financeiras reduzem fraudes, prejuízos e fortalecem sua reputação e inovação.  
+- Resultado: menos fraudes, clientes mais seguros e instituições mais competitivas.
 
-```http
-GET http://localhost:8080/pix/12345678900
+---
 
-{
-  "keyType": "CPF",
-  "key": "12345678900",
-  "owner": {
-    "name": "Felipe Mariano",
-    "taxIdNumber": "12345678900"
-  },
-  "bankAccount": {
-    "participant": "60701190",
-    "branch": "0001",
-    "accountNumber": "987654",
-    "accountType": "CACC"
-  },
-  "createdAt": "2020-05-05T18:00:00Z",
-  "scoreConfiabilidade": 0.92
-}
+## 🚀 Diferenciais
+
+- Atua antes da fraude, emitindo alertas em tempo real e evitando prejuízos.  
+- Aumenta a segurança e transparência, melhorando a experiência do usuário e fidelização.
+
+---
+
+## 📦 Estrutura de Pastas Principal
+
+```
+├── backend/               # Aplicação Spring Boot (Java 21)
+├── frontend/              # Aplicação React
+├── ai-engine/             # Serviço de IA em Python
+├── nginx/                 # Configuração de proxy reverso
+├── db/                    # Configurações de banco de dados
+├── docker-compose.yml     # Orquestração dos containers
+├── CONFIG.md              # Guia completo de instalação e configuração
+└── README.md              # Este documento
+```
+
+---
+
+## ⚙️ Guia de Instalação e Configuração
+
+Para instruções completas de instalação e preparação do ambiente, consulte o [CONFIG.md](./CONFIG.md).
+
+---
+
+## 🎯 Funcionalidades Principais
+
+- Análise preditiva de confiabilidade de chaves Pix.  
+- Score de confiança com motivos detalhados para suspeitas.  
+- Integração backend + frontend + IA via Docker.  
+- Painel web para visualização e análise de transações.
+
+---
+
+## 🛠️ Como Contribuir
+
+1. Fork o projeto.  
+2. Crie sua branch: `git checkout -b minha-feature`  
+3. Faça suas alterações.  
+4. Commit suas alterações: `git commit -m 'feat: Minha nova feature'`  
+5. Push para sua branch: `git push origin minha-feature`  
+6. Abra um Pull Request.
+
+---
+
+**Desenvolvido por:**  
+[Felipe Mariano](https://github.com/felipemariano2511),  
+[Matheus Henrique](https://github.com/MatheusHAB),  
+[Ramon Romano](https://github.com/ramon-romano) e  
+[Vinícius Stencel](https://github.com/viniciusstencel).
