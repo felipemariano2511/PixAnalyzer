@@ -27,6 +27,13 @@ function PixConfirmationScreen() {
     localStorage.getItem("requestTransaction") || "{}"
   );
 
+  function mascararDocumento(doc) {
+    if (!doc) return "";
+    const primeiros = doc.slice(0, 3);
+    const mascarado = "*".repeat(doc.length - 3);
+    return primeiros + mascarado;
+  }
+
   console.log(pixData.transactionInformation.receiverName);
 
   const dadosPix = location.state?.dadosPix || {};
@@ -60,8 +67,6 @@ function PixConfirmationScreen() {
       const resultadoTransferencia = response.data.body;
 
       const success = response.data;
-
-      console.log("Ola", success);
 
       if (success.statusCodeValue === 200) {
         navigate("/sucesso", { state: { dados: dadosPix } });
@@ -137,9 +142,11 @@ function PixConfirmationScreen() {
             </span>
           </div>
           <div className={styles.detailItem}>
-            <span className={styles.label}>Valor</span>
-            <span className={styles.value}>R$ {valor}</span>
-          </div>
+  <span className={styles.label}>Valor</span>
+  <span className={styles.value}>
+    R$ {Number(valor).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+  </span>
+</div>
           <div className={styles.detailItem}>
             <span className={styles.label}>Chave Pix</span>
             <span className={`${styles.value} ${styles.blurred}`}>
@@ -148,8 +155,8 @@ function PixConfirmationScreen() {
           </div>
           <div className={styles.detailItem}>
             <span className={styles.label}>CPF/CNPJ</span>
-            <span className={`${styles.value} ${styles.blurred}`}>
-              {dadosPix.documento || "***.***.***-**"}
+            <span className={styles.value}>
+              {mascararDocumento(dadosPix.documento) || "***.***.***-**"}
             </span>
           </div>
           <div className={styles.detailItem}>
@@ -192,7 +199,18 @@ function PixConfirmationScreen() {
       </div>
       {showBanner && (
         <AlertBanner
-          message="Alerta: Individuo suspeito detectado!! Aconselhamos que prossiga, apenas se confiar no individuo."
+          message={
+            <>
+              <strong>⚠️ Alerta: Chave Pix considerada suspeita!</strong><br />
+              Motivos:
+              <ul>
+                {pixData.aiAnalyze.fraudReasons.map((reason, index) => (
+                  <li key={index}>{reason}</li>
+                ))}
+              </ul>
+              Recomendamos prosseguir apenas se você conhecer e confiar no destinatário.
+            </>
+          }
           onClose={() => setShowBanner(false)}
         />
       )}

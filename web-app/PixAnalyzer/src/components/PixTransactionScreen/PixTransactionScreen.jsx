@@ -26,7 +26,14 @@ function PixTransactionScreen() {
   console.log(requestTransaction);
 
   const handleContinue = async () => {
-    const valorNumerico = parseFloat(amount.replace(",", "."));
+   const parseValor = (valor) => {
+  const cleaned = valor.replace(/\./g, "").replace(",", ".");
+  const numero = Number(cleaned);
+  return isNaN(numero) ? 0 : numero;
+};
+
+const valorNumerico = parseValor(amount);
+
     if (isNaN(valorNumerico) || valorNumerico <= 0) {
       alert("Informe um valor válido.");
       return;
@@ -74,11 +81,23 @@ function PixTransactionScreen() {
 
   const toggleBalanceVisibility = () => setShowBalance(!showBalance);
 
-  const formatAmount = (valor) => {
-    const valorAtual = parseFloat(amount.replace(",", ".")) || 0;
-    const novoValor = (valorAtual + valor).toFixed(2).replace(".", ",");
-    setAmount(novoValor);
+  const formatAmount = (valorAdicionar) => {
+  const parseValor = (valor) => {
+    const cleaned = valor.replace(/\./g, "").replace(",", ".");
+    return parseFloat(cleaned) || 0;
   };
+
+  const valorAtual = parseValor(amount);
+  const novoValor = valorAtual + valorAdicionar;
+
+  const formatted = novoValor.toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  setAmount(formatted);
+};
+
 
   const maskTaxId = (value) => {
     const digits = value.replace(/\D/g, "");
@@ -98,7 +117,7 @@ function PixTransactionScreen() {
     <div className={styles.pixContainer}>
       <div className={styles.pixHeader}>
         <div className={styles.headerContent}>
-          <Link to="/home" className={styles.backButton}>
+          <Link to="/input" className={styles.backButton}>
             <IoIosArrowBack />
           </Link>
           <h1>Pix</h1>
@@ -181,24 +200,27 @@ function PixTransactionScreen() {
             <div className={styles.secondaryLabel}>Valor</div>
             <div className={styles.amountInputWrapper}>
               <span className={styles.currencyPrefix}>R$</span>
-              <input
+             <input
                 type="text"
                 id="amountInput"
                 className={styles.amountInput}
                 placeholder="0,00"
                 value={amount}
                 onChange={(e) => {
-                  let raw = e.target.value;
+                  let digits = e.target.value.replace(/\D/g, "");
 
-                  raw = raw.replace(/[^\d,]/g, "");
-                  const parts = raw.split(",");
-                  if (parts.length > 2) return;
-
-                  if (parts[1]?.length > 2) {
-                    parts[1] = parts[1].slice(0, 2);
+                  if (!digits) {
+                    setAmount("");
+                    return;
                   }
 
-                  setAmount(parts.join(","));
+                  const numericValue = parseInt(digits, 10);
+                  const formatted = (numericValue / 100).toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  });
+
+                  setAmount(formatted);
                 }}
               />
             </div>

@@ -1,3 +1,5 @@
 grpcio
 grpcio-tools
 pandas
+joblib
+scikit-learn
