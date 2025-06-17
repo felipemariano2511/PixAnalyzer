@@ -1,50 +1,64 @@
-#!/bin/bash
-
-# Habilitar erro imediato se algum comando falhar
+#!/usr/bin/env bash
 set -e
 
-echo "Verificando modelo Pessoa Juridica..."
+echo "## 🧱 Build dos Módulos Java"
 
+echo "-> dict-api/DictApi"
+pushd dict-api/DictApi
+./mvnw clean package -DskipTests
+popd
+
+echo "-> java-service/PixAnalyzer"
+pushd java-service/PixAnalyzer
+./mvnw clean package -DskipTests
+popd
+
+echo "-> java-service/KeysFrontApi"
+pushd java-service/KeysFrontApi
+./mvnw clean package -DskipTests
+popd
+
+echo "-> registro-nacional/DadosGov"
+pushd registro-nacional/DadosGov
+./mvnw clean package -DskipTests
+popd
+
+echo "-> registro-nacional/ReceitaFederamCNPJ"
+pushd registro-nacional/ReceitaFederamCNPJ
+./mvnw clean package -DskipTests
+popd
+
+echo
+echo "## 🤖 Treino dos Modelos de IA"
+
+# PJ
 if [ -f "./python-ia/ai_analyze/data/cnpj/confidence_model.pkl" ]; then
-    echo "Modelo Pessoa Jurídica ja existe, pulando treino..."
+  echo "Modelo Pessoa Jurídica já existe, pulando treino..."
 else
-    echo "Executando treino do modelo de Pessoa Juridica..."
-    cd "./python-ia/ai_analyze/data/cnpj"
-    python3 train_model_pj.py
-    if [ $? -ne 0 ]; then
-        echo "Erro no treino do modelo Pessoa Juridica. Abortando."
-        exit 1
-    fi
-    cd - > /dev/null
+  echo "Executando treino do modelo de Pessoa Jurídica..."
+  pushd python-ia/ai_analyze/data/cnpj
+  python train_model_pj.py
+  popd
 fi
 
-echo "Verificando modelo Pessoa Fisica..."
-
+# PF
 if [ -f "./python-ia/ai_analyze/data/cpf/confidence_model.pkl" ]; then
-    echo "Modelo Pessoa Fisica ja existe, pulando treino..."
+  echo "Modelo Pessoa Física já existe, pulando treino..."
 else
-    echo "Executando treino do modelo de Pessoa Fisica..."
-    cd "./python-ia/ai_analyze/data/cpf"
-    python3 train_model_pf.py
-    if [ $? -ne 0 ]; then
-        echo "Erro no treino do modelo Pessoa Fisica. Abortando."
-        exit 1
-    fi
-    cd - > /dev/null
+  echo "Executando treino do modelo de Pessoa Física..."
+  pushd python-ia/ai_analyze/data/cpf
+  python train_model_pf.py
+  popd
 fi
 
-echo "Subindo container db-postgres..."
+echo
+echo "## 🐳 Subindo containers Docker"
+
+echo "-> db-postgres"
 docker compose up db-postgres -d
-if [ $? -ne 0 ]; then
-    echo "Erro ao subir db-postgres. Abortando."
-    exit 1
-fi
 
-echo "Subindo todos os containers em modo detach..."
+echo "-> todos os serviços"
 docker compose up -d
-if [ $? -ne 0 ]; then
-    echo "Erro ao subir os containers. Abortando."
-    exit 1
-fi
 
-echo "Tudo concluido com sucesso."
+echo
+echo "### ✅ Tudo concluído com sucesso!"

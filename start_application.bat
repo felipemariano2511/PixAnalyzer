@@ -1,52 +1,80 @@
 @echo off
+setlocal enabledelayedexpansion
 
-REM Verifica se confidence_model.pkl existe para PJ
-if exist ".\python-ia\ai_analyze\data\cnpj\confidence_model.pkl" (
+echo ====================================
+echo Build dos Modulos Java
+echo ====================================
+
+echo.
+echo -> dict-api\DictApi
+cd dict-api\DictApi || (echo Erro ao acessar dict-api\DictApi & exit /b)
+call mvnw.cmd clean package -DskipTests
+cd ..\..
+
+echo.
+echo -> java-service\PixAnalyzer
+cd java-service\PixAnalyzer || (echo Erro ao acessar java-service\PixAnalyzer & exit /b)
+call mvnw.cmd clean package -DskipTests
+cd ..\..
+
+echo.
+echo -> java-service\KeysFrontApi
+cd java-service\KeysFrontApi || (echo Erro ao acessar java-service\KeysFrontApi & exit /b)
+call mvnw.cmd clean package -DskipTests
+cd ..\..
+
+echo.
+echo -> registro-nacional\DadosGov
+cd registro-nacional\DadosGov || (echo Erro ao acessar registro-nacional\DadosGov & exit /b)
+call mvnw.cmd clean package -DskipTests
+cd ..\..
+
+echo.
+echo -> registro-nacional\ReceitaFederamCNPJ
+cd registro-nacional\ReceitaFederamCNPJ || (echo Erro ao acessar registro-nacional\ReceitaFederamCNPJ & exit /b)
+call mvnw.cmd clean package -DskipTests
+cd ..\..
+
+echo ====================================
+echo Treino dos Modelos de IA
+echo ====================================
+
+REM Treino Pessoa Juridica (PJ)
+IF EXIST python-ia\ai_analyze\data\cnpj\confidence_model.pkl (
     echo Modelo Pessoa Juridica ja existe, pulando treino...
-) else (
+) ELSE (
     echo Executando treino do modelo de Pessoa Juridica...
-    pushd ".\python-ia\ai_analyze\data\cnpj"
+    cd python-ia\ai_analyze\data\cnpj || (echo Erro ao acessar pasta cnpj & exit /b)
     python train_model_pj.py
-    if errorlevel 1 (
-        echo Erro no treino do modelo Pessoa Juridica. Abortando.
-        pause
-        popd
-        goto :EOF
-    )
-    popd
+    cd ..\..\..\..
 )
 
-REM Verifica se confidence_model.pkl existe para PF
-if exist ".\python-ia\ai_analyze\data\cpf\confidence_model.pkl" (
+echo.
+
+REM Treino Pessoa Fisica (PF)
+IF EXIST python-ia\ai_analyze\data\cpf\confidence_model.pkl (
     echo Modelo Pessoa Fisica ja existe, pulando treino...
-) else (
+) ELSE (
     echo Executando treino do modelo de Pessoa Fisica...
-    pushd ".\python-ia\ai_analyze\data\cpf"
+    cd python-ia\ai_analyze\data\cpf || (echo Erro ao acessar pasta cpf & exit /b)
     python train_model_pf.py
-    if errorlevel 1 (
-        echo Erro no treino do modelo Pessoa Fisica. Abortando.
-        pause
-        popd
-        goto :EOF
-    )
-    popd
+    cd ..\..\..\..
 )
 
-echo Subindo container db-postgres...
+echo ====================================
+echo Subindo containers Docker
+echo ====================================
+
+echo -> db-postgres
 docker compose up db-postgres -d
-if errorlevel 1 (
-    echo Erro ao subir db-postgres. Abortando.
-    pause
-    goto :EOF
-)
 
-echo Subindo todos containers em modo detach...
+echo -> todos os servicos
 docker compose up -d
-if errorlevel 1 (
-    echo Erro ao subir containers em modo detach. Abortando.
-    pause
-    goto :EOF
-)
 
-echo Tudo concluido com sucesso.
+echo.
+echo ====================================
+echo Tudo concluido com sucesso!
+echo ====================================
+
+endlocal
 pause

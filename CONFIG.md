@@ -43,4 +43,8 @@ Após a instalação dos requisitos acima, execute o script correspondente ao se
 
 ---
 
+### ⏳ Aviso Importante
+
+> 🕒 **Na primeira execução**, o processo pode levar **até 5 minutos** para ser concluído, pois depende do download e preparação de containers.
+
 Tudo pronto! Agora é só iniciar a aplicação e aproveitar 🚀
