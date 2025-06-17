@@ -1,0 +1,165 @@
+.pixContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* ocupa toda a altura da tela */
+  overflow-y: auto; /* ativa scroll vertical se necessário */
+  background-color: #fff; /* cor de fundo padrão */
+  width: 100vw;          /* largura total da viewport */
+  box-sizing: border-box; /* garante que padding não aumente largura */
+}
+
+.pixHeader {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #8b008b 0%,
+    #8b008b 45%,
+    #9e006e 52%,
+    #b1123a 60%,
+    #cc092f 70%,
+    #cc092f 100%
+  );
+  overflow: visible;
+  padding-bottom: 30px;
+  z-index: 0;
+}
+.pixGradient {
+  padding: 100px 20px 60px;
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+.backArrow {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 3;
+}
+.projectName{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-left: 0;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 70px;
+  z-index: 0;
+  display: block;
+  overflow: hidden;
+}
+.pixBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 2rem;   /* dá um padding lateral maior para não grudar na borda */
+  width: 100%;         /* ocupa 100% da largura do container */
+  box-sizing: border-box; /* garante que padding não quebre layout */
+}
+
+.loading {
+  text-align: center;
+  margin-top: 40px;
+  color: #555;
+}
+.errorText {
+  text-align: center;
+  margin-top: 20px;
+  color: red;
+}
+.userGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;          /* garantir que ocupe toda a largura possível */
+  box-sizing: border-box;
+}
+.userCard {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  color: #333;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.legendContainer {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.legendContainer h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+.legendItems {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.colorBox {
+  width: 20px;
+  height: 20px;
+  border-left: 5px solid;
+  border-radius: 4px;
+}
+
+.clipboardIcon {
+  padding-left: 15px;
+  cursor: pointer;
+}
+
+.confirmButton {
+  background-color: #cc092f;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  width: 100%;
+  max-width: 300px;
+  margin: 1.5rem auto;
+  display: block;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  
+}
+
+.confirmButton:hover {
+  background-color: #a20726;
+}
+
+.footerButtonWrapper {
+  position: sticky;
+  bottom: 0;
+  background-color: transparent; /* remove fundo branco */
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  z-index: 10; /* mantém acima de outros elementos se necessário */
+}
+
+

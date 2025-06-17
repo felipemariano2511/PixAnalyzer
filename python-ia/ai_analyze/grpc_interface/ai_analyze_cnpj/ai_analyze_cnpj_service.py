@@ -18,7 +18,16 @@ def dias_desde(data_str):
         return None
 
 def calcular_confiabilidade(row):
-    df_input = pd.DataFrame([row])
+    # Lista das colunas usadas no treino, as mesmas de X
+    expected_cols = ['origin_client_id', 'amount', 'dias_desde_timestamp', 'dias_desde_registration_date',
+                     'dias_desde_status_date', 'key','key_type', 'institution', 'branch', 'account_number',
+                     'account_type', 'owner_type', 'owner_name', 'status', 'share_capital', 'branch_type',
+                     'common_transfers_client', 'all_transfers']
+    
+    # Criar um dict filtrado com apenas as colunas esperadas
+    filtered_row = {k: row.get(k, None) for k in expected_cols}
+    
+    df_input = pd.DataFrame([filtered_row])
     predicted_score = score_model.predict(df_input)[0]
     fraud_prediction = fraud_model.predict(df_input)
     predicted_labels = mlb.inverse_transform(fraud_prediction)[0]

@@ -18,28 +18,49 @@ function PixInputScreen() {
       return digits.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
     }
     if (/^\d{14}$/.test(digits)) {
-      return digits.replace(
-        /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
-        "$1.$2.$3/$4-$5"
-      );
+      return digits.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
     }
-    return value;
+    if (/^\d{12}$/.test(digits)) {
+      return digits.replace(/(\d{2})(\d{2})(\d{4})(\d{4})/, "+$1 ($2) $3-$4");
+    }
+    return value; // Não formatar e-mail ou EVP
   };
 
   const getCleanedPixKey = (key) => {
-    const trimmed = key.trim();
-    if (
-      /^\d{11}$/.test(trimmed.replace(/\D/g, "")) ||
-      /^\d{14}$/.test(trimmed.replace(/\D/g, ""))
-    ) {
-      return trimmed.replace(/\D/g, "");
+    const trimmedKey = key.trim();
+
+    // CPF
+    const cpf = trimmedKey.replace(/\D/g, "");
+    if (/^\d{11}$/.test(cpf)) return cpf;
+
+    // CNPJ
+    const cnpj = trimmedKey.replace(/\D/g, "");
+    if (/^\d{14}$/.test(cnpj)) return cnpj;
+
+    // Telefone com DDI
+    const phone = trimmedKey.replace(/\D/g, "");
+    if (/^\d{12}$/.test(phone)) return phone;
+
+    // E-mail
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedKey)) return trimmedKey;
+
+    // EVP (UUID)
+    if (/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(trimmedKey)) {
+      return trimmedKey;
     }
-    return trimmed;
+
+    return null;
   };
 
   const handleChange = (e) => {
     const input = e.target.value;
     setPixKey(formatPixKey(input));
+  };
+
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pasteData = e.clipboardData.getData("text");
+    setPixKey(formatPixKey(pasteData));
   };
 
   const handleContinue = async () => {
@@ -55,10 +76,7 @@ function PixInputScreen() {
       amount: null,
       description: null,
     };
-    localStorage.setItem(
-      "requestTransaction",
-      JSON.stringify(requestTransaction)
-    );
+    localStorage.setItem("requestTransaction", JSON.stringify(requestTransaction));
 
     try {
       const response = await buscarDadosDaChavePix(
@@ -95,12 +113,16 @@ function PixInputScreen() {
     <div className={styles.pixContainer}>
       <div className={styles.pixHeader}>
         <div className={styles.pixGradient}>
-          <span className={styles.backArrow}>
+          <span
+            className={styles.backArrow}
+            onClick={() => navigate("/home")}
+            style={{ cursor: "pointer" }}
+          >
             <IoIosArrowBack />
           </span>
           <h1>Como você quer transferir?</h1>
           <svg
-            className="wave"
+            className={styles.wave}
             viewBox="0 0 1440 120"
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -142,6 +164,7 @@ function PixInputScreen() {
             id="pixKey"
             value={pixKey}
             onChange={handleChange}
+            onPaste={handlePaste}
             required
             placeholder=" "
             autoComplete="on"

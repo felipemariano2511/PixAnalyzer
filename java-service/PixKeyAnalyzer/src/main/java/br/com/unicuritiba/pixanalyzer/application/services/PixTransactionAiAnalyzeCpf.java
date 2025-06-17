@@ -56,7 +56,6 @@ public class PixTransactionAiAnalyzeCpf {
                     .setCommonTransfersClient(countCommonTransfers(aiAnalyzeRequestDto.getDestinationKeyValue()))
                     .setAllTransfers(countAllTransfers(aiAnalyzeRequestDto.getDestinationKeyValue()))
                     .build();
-            System.out.println("AKi " + request);
 
                 return grpcClient.analyze(request);
 
