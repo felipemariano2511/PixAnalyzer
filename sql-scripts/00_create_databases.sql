@@ -13,3 +13,7 @@ WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'receita_federal_cnpj'
 SELECT 'CREATE DATABASE dados_gov'
 WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'dados_gov')
 \gexec
+
+SELECT 'CREATE DATABASE keys_front'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'keys_front')
+\gexec

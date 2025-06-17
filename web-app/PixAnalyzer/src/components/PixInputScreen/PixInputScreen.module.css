@@ -11,10 +11,10 @@ body {
 .pixContainer {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  width: 100vw;
-  overflow-x: hidden;
-  background-color: white;
+  height: 100vh; /* ocupa toda a altura da tela */
+  background-color: #fff; /* cor de fundo padrão */
+  width: 100vw;          /* largura total da viewport */
+  box-sizing: border-box; /* garante que padding não aumente largura */
 }
 
 .pixHeader {

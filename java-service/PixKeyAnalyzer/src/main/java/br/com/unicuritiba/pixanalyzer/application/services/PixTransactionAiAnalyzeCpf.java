@@ -2,8 +2,11 @@ package br.com.unicuritiba.pixanalyzer.application.services;
 
 import br.com.unicuritiba.pixanalyzer.AiAnalyzeCpfRequest;
 import br.com.unicuritiba.pixanalyzer.AiAnalyzeCpfResponse;
+import br.com.unicuritiba.pixanalyzer.domain.models.TransfersCount;
 import br.com.unicuritiba.pixanalyzer.domain.repositories.PixTransactionRepository;
 import br.com.unicuritiba.pixanalyzer.domain.dto.AiAnalyzeRequestDto;
+import br.com.unicuritiba.pixanalyzer.domain.repositories.TransfersCountRepository;
+import br.com.unicuritiba.pixanalyzer.infrastructure.exceptions.NotFoundException;
 import br.com.unicuritiba.pixanalyzer.integrations.ai.AiAnalyzeCpfGrpcClient;
 import br.com.unicuritiba.pixanalyzer.domain.dto.DictApiResponseDto;
 import br.com.unicuritiba.pixanalyzer.domain.dto.DadosGovResponseDto;
@@ -17,6 +20,9 @@ public class PixTransactionAiAnalyzeCpf {
 
     @Autowired
     private PixTransactionRepository pixTransactionRepository;
+
+    @Autowired
+    private TransfersCountRepository transfersCountRepository;
 
     private final AiAnalyzeCpfGrpcClient grpcClient;
 
@@ -47,7 +53,7 @@ public class PixTransactionAiAnalyzeCpf {
                     .setBirthDate(dataGov.getBirthDate())
                     .setRegistrationDate(dataGov.getRegistrationDate())
                     .setStatus(dataGov.getStatus())
-                    .setCommonTransfersClient(countCommonTransfers(aiAnalyzeRequestDto.getOriginClientId(), aiAnalyzeRequestDto.getDestinationKeyValue()))
+                    .setCommonTransfersClient(countCommonTransfers(aiAnalyzeRequestDto.getDestinationKeyValue()))
                     .setAllTransfers(countAllTransfers(aiAnalyzeRequestDto.getDestinationKeyValue()))
                     .build();
 
@@ -60,12 +66,20 @@ public class PixTransactionAiAnalyzeCpf {
         }
     }
 
-    public Integer countCommonTransfers(Long id, String key) {
-        return pixTransactionRepository.countByOriginClientIdAndDestinationKeyValue(id, key);
+    public Integer countCommonTransfers(String key) {
+        TransfersCount transfersCount = transfersCountRepository.findByDestinationKeyValue(key).orElseThrow(
+                () -> new NotFoundException("Chave Pix não encontrada!")
+        );
+
+        return Math.toIntExact(transfersCount.getCommonTransfers());
     }
 
     public Integer countAllTransfers(String key) {
-        return pixTransactionRepository.countByDestinationKeyValue(key);
+        TransfersCount transfersCount = transfersCountRepository.findByDestinationKeyValue(key).orElseThrow(
+                () -> new NotFoundException("Chave Pix não encontrada!")
+        );
+
+        return Math.toIntExact(transfersCount.getAllTransfers());
     }
 
 }

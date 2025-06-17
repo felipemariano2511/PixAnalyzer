@@ -25,7 +25,7 @@ public class PixTrasnsfersDataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try (Connection connection = dataSource.getConnection()) {
-            var keyOptional = repository.findById(UUID.fromString("cc34f1e4-4c45-4fea-b91f-6ca2b26ee9f6"));
+            var keyOptional = repository.findById(UUID.fromString("a0eb5057-65bd-4da1-ad54-e74dbd9ee3a5"));
 
             if(keyOptional.isEmpty()){
                 ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/data.sql"));
