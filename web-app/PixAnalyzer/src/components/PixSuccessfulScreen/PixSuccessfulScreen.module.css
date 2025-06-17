@@ -23,7 +23,8 @@ body,
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .pix-header {

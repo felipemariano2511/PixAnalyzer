@@ -33,7 +33,7 @@ function PixSuccessfulScreen() {
         <div className={styles["info-area"]}>
           <h2 className={styles["info-title"]}>Pix concluído</h2>
           <p className={styles["info-description"]}>
-            Deu tudo certo com a transação de R$ {requestTransaction.amount}.
+            Deu tudo certo com a transação de <br /> R$ {Number(requestTransaction.amount).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}.
           </p>
         </div>
 
