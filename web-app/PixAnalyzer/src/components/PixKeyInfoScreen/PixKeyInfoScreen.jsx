@@ -77,7 +77,7 @@ export default function PixKeyInfoScreen() {
   async function buscarDados() {
     try {
       const response = await axios.get(
-        "https://felipemariano.com.br/api/keys-front/buscar_chaves"
+        "https://localhost/api/pix-analyzer/transferencia/pix/info-chave-pix"
       );
       return response;
     } catch (error) {
