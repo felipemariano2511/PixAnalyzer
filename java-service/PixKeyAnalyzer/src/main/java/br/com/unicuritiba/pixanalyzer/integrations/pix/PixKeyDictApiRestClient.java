@@ -29,7 +29,7 @@ public class PixKeyDictApiRestClient {
             HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
 
             ResponseEntity<DictApiResponseWrapperDto> response = restTemplate.exchange(
-                    "https://felipemariano.com.br/api/dict-api/keys",
+                    "https://localhost/api/dict-api/keys",
                     HttpMethod.POST,
                     requestEntity,
                     new ParameterizedTypeReference<DictApiResponseWrapperDto>() {}

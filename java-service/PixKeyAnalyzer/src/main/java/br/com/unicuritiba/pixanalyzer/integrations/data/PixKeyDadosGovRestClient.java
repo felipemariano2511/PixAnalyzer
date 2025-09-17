@@ -21,7 +21,7 @@ public class PixKeyDadosGovRestClient {
 
         try {
             ResponseEntity<DadosGovResponseWrapperDto> response = restTemplate.exchange(
-                    "https://felipemariano.com.br/api/dados-gov/cpf/" + cpf,
+                    "https://localhost/api/dados-gov/cpf/" + cpf,
                     HttpMethod.GET,
                     null,
                     new ParameterizedTypeReference<DadosGovResponseWrapperDto>() {

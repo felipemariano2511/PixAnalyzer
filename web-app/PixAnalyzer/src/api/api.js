@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://felipemariano.com.br/api/pix-analyzer/transferencia/pix',
+  baseURL: 'https://localhost/api/keys-front/buscar_chaves',
 });
 
 export const buscarDadosDaChavePix = (destinationKeyValue, originClientId) => {

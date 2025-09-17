@@ -21,7 +21,7 @@ public class PixKeyReceitaFederalCnpjRestClient {
 
         try {
             ResponseEntity<ReceitaFederalCnpjResponseWrapperDto> response = restTemplate.exchange(
-                    "https://felipemariano.com.br/api/receita-federal/cnpj/" + cnpj,
+                    "https://localhost/api/receita-federal/cnpj/" + cnpj,
                     HttpMethod.GET,
                     null,
                     new ParameterizedTypeReference<ReceitaFederalCnpjResponseWrapperDto>() {}
